@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Manage Plans{% endblock %}
+
+{% block content %}
+<div id="mainContent" class="main-content">
+
+  <!-- Header (Unchanged) -->
+  <div style="border-bottom: 1px solid #e5e7eb; padding: 1.3rem 1.5rem; background: #ffffff;">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center">
+        <h1 style="font-size: 1.2rem; font-weight: 700; color: #111827;">
+          Manage Subscription Plan
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plan Card Section -->
+  <div style="padding: 2rem 1.5rem; display: flex; justify-content: center;">
+    <div style="width: 100%; max-width: 950px; border: 1px solid #e5e7eb; background: #f9fafb; border-radius: 1rem; box-shadow: 0 8px 24px rgba(0,0,0,0.05); padding: 2.5rem;">
+
+      <!-- Top Info Row -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <div>
+          <h2 style="font-size: 1.6rem; font-weight: 700; color: #111827;">Pro Plan</h2>
+          <p style="color: #6b7280; margin-top: 0.35rem;">You are currently subscribed to the Pro Plan</p>
+        </div>
+        <div style="
+          padding: 0.4rem 0.9rem;
+          background: linear-gradient(135deg, #10b981, #34d399);
+          color: white;
+          border-radius: 9999px;
+          font-weight: 600;
+          font-size: 0.875rem;
+        ">
+          Active
+        </div>
+      </div>
+
+      <!-- Plan Details -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; font-size: 0.98rem; color: #374151;">
+        <div>
+          <p style="margin-bottom: 0.75rem;"><strong>Start Date:</strong><br> May 1, 2025</p>
+          <p style="margin-bottom: 0.75rem;"><strong>Renewal Date:</strong><br> May 1, 2026</p>
+          <p style="margin-bottom: 0.75rem;"><strong>Billing Cycle:</strong><br> Monthly</p>
+        </div>
+        <div>
+          <p style="margin-bottom: 0.75rem;"><strong>Price:</strong><br> $49/month</p>
+          <p style="margin-bottom: 0.75rem;"><strong>API Usage:</strong><br> 18,445 / 100,000 requests</p>
+          <p style="margin-bottom: 0.75rem;"><strong>Plan ID:</strong><br> #PRO-9321-XYZ</p>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <hr style="margin: 2.5rem 0; border-color: #e5e7eb;">
+
+      <!-- Features List -->
+      <div>
+        <h3 style="font-weight: 600; color: #111827; margin-bottom: 1.2rem;">Included Features:</h3>
+        <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; list-style: none; padding: 0;">
+          <li style="display: flex; align-items: center; gap: 0.75rem; color: #4b5563;">
+            <div style="width: 32px; height: 32px; background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold;">B</div>
+            Unlimited bots & workflows
+          </li>
+          <li style="display: flex; align-items: center; gap: 0.75rem; color: #4b5563;">
+            <div style="width: 32px; height: 32px; background: #ede9fe; color: #7c3aed; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold;">L</div>
+            All LLMs supported (GPT, Claude, Gemini...)
+          </li>
+          <li style="display: flex; align-items: center; gap: 0.75rem; color: #4b5563;">
+            <div style="width: 32px; height: 32px; background: #fef3c7; color: #d97706; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold;">S</div>
+            Priority support
+          </li>
+          <li style="display: flex; align-items: center; gap: 0.75rem; color: #4b5563;">
+            <div style="width: 32px; height: 32px; background: #dcfce7; color: #16a34a; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold;">T</div>
+            Team sharing (10 users)
+          </li>
+        </ul>
+      </div>
+
+      <!-- Upgrade Button -->
+      <div style="text-align: right; margin-top: 3rem;">
+        <button style="
+          padding: 0.85rem 1.75rem;
+          background: linear-gradient(135deg, #6366f1, #8b5cf6);
+          color: white;
+          border: none;
+          border-radius: 0.5rem;
+          font-weight: 600;
+          font-size: 1rem;
+          cursor: pointer;
+          box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        ">
+          Upgrade Plan
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}

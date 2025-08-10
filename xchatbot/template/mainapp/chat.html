@@ -1,0 +1,11 @@
+<h2>Chat with Mikasa 💬</h2>
+<div style="white-space: pre-line;">
+  {% for line in chat %}
+    <p>{{ line }}</p>
+  {% endfor %}
+</div>
+<form method="post">
+  {% csrf_token %}
+  <input type="text" name="message" required>
+  <button type="submit">Send</button>
+</form>

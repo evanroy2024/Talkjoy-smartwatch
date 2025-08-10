@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Guidance{% endblock %}
+
+{% block content %}
+<div id="mainContent" class="main-content">
+
+  <!-- Header -->
+  <div style="border-bottom: 1px solid #e5e7eb; padding: 1rem 1.5rem; background: #ffffff;">
+    <h1 style="font-size: 1.2rem; font-weight: 700; color: #111827;">Help & Guidance</h1>
+  </div>
+
+  <!-- Layout -->
+  <div style="display: flex; min-height: 500px;">
+    
+    <!-- Sidebar -->
+    <div style="width: 250px; border-right: 1px solid #e5e7eb; padding: 1.5rem; background: #f9fafb;">
+      <ul style="list-style: none; padding: 0; font-size: 0.95rem; color: #374151; font-weight: 500;">
+        <li style="margin-bottom: 1rem; cursor: pointer;" onclick="showGuide('bot')">How to Create a Bot</li>
+        <li style="margin-bottom: 1rem; cursor: pointer;" onclick="showGuide('apikey')">How to Add API Key</li>
+        <li style="margin-bottom: 1rem; cursor: pointer;" onclick="showGuide('train')">How to Train a Model</li>
+        <li style="margin-bottom: 1rem; cursor: pointer;" onclick="showGuide('upgrade')">How to Upgrade Plan</li>
+        <li style="margin-bottom: 1rem; cursor: pointer;" onclick="showGuide('security')">Security Settings</li>
+      </ul>
+    </div>
+
+    <!-- Content Area -->
+    <div style="flex: 1; padding: 2rem; background: white;">
+      <div id="guideText" style="font-size: 1rem; color: #4b5563;">
+        <p>Select a topic from the left to view guidance.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Script -->
+<script>
+  const guides = {
+    bot: "Click 'Create Bot', give it a name, description, and choose a model.",
+    apikey: "Go to Credentials, click 'Add', choose a model, and paste your API key.",
+    train: "Navigate to Knowledge section or Website tab and upload your content or paste a link.",
+    upgrade: "Go to Manage Plans, view your current plan, and click Upgrade.",
+    security: "In Account Settings, you can update your password and delete your account."
+  };
+
+  function showGuide(topic) {
+    document.getElementById("guideText").innerHTML = `<p>${guides[topic]}</p>`;
+  }
+</script>
+{% endblock %}

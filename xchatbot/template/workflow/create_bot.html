@@ -1,0 +1,1130 @@
+create_bot.html{% extends "base.html" %}
+{% load static %}
+{% block title %}AI Builder - Create Your Intelligent Assistant{% endblock %}
+
+{% block content %}
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #f8f9fa;
+    min-height: 100vh;
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.main-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e1e8ed;
+    overflow: hidden;
+}
+
+.header {
+    background: #2c3e50;
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+}
+
+.header::after {
+    display: none;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.header-content {
+    position: relative;
+    z-index: 1;
+}
+
+.header-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+.progress-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #3498db;
+    transition: width 0.3s ease;
+    width: 20%;
+    position: relative;
+}
+
+.progress-fill::after {
+    display: none;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.tabs {
+    display: flex;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e1e8ed;
+    overflow-x: auto;
+    position: relative;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 1.25rem 1.5rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+    color: #7f8c8d;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    min-width: 140px;
+    justify-content: center;
+    position: relative;
+}
+
+.tab-btn::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #3498db;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.tab-btn.active {
+    color: #2c3e50;
+    background: white;
+    font-weight: 600;
+}
+
+.tab-btn.active::before {
+    transform: scaleX(1);
+}
+
+.tab-btn:hover:not(.active) {
+    background: #f1f3f4;
+    color: #2c3e50;
+    transform: translateY(-1px);
+}
+
+.tab-content {
+    padding: 3rem 2rem;
+    min-height: 400px;
+}
+
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.section-subtitle {
+    color: #7f8c8d;
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: #34495e;
+    font-size: 0.95rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: 2px solid #e1e8ed;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+    font-family: inherit;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    transform: translateY(-1px);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 140px;
+    font-family: inherit;
+}
+
+.form-file {
+    padding: 1rem;
+    border: 2px dashed #e1e8ed;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: #f8f9fa;
+}
+
+.form-file:hover {
+    border-color: #3498db;
+    background: #f1f3f4;
+    transform: translateY(-1px);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.upload-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.upload-zone {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border: 2px dashed #e1e8ed;
+    border-radius: 20px;
+    padding: 3.5rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-zone::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(52, 152, 219, 0.02) 50%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.upload-zone:hover {
+    border-color: #3498db;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.1);
+}
+
+.upload-zone:hover::before {
+    opacity: 1;
+}
+
+.upload-zone:hover .upload-icon {
+    color: #3498db;
+    transform: scale(1.05);
+}
+
+.upload-icon {
+    color: #7f8c8d;
+    margin-bottom: 1.5rem;
+    transition: all 0.4s ease;
+}
+
+.upload-zone h3 {
+    color: #2c3e50;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.upload-zone p {
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+.upload-button {
+    background: #3498db;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+}
+
+.upload-zone:hover .upload-button {
+    background: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.file-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.file-formats {
+    color: #3498db;
+    font-weight: 600;
+}
+
+.file-size {
+    color: #7f8c8d;
+}
+
+.hidden-input {
+    display: none;
+}
+
+.processing-info {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border: 1px solid #e1e8ed;
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-top: 2.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.info-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.info-header svg {
+    color: #3498db;
+}
+
+.info-header h3 {
+    color: #2c3e50;
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.processing-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e1e8ed;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.feature:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+    border-color: #3498db;
+}
+
+.feature svg {
+    color: #3498db;
+    flex-shrink: 0;
+}
+
+.feature span {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background: #3498db;
+    color: white;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+}
+
+.btn-primary:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.btn-secondary {
+    background: white;
+    color: #7f8c8d;
+    border: 2px solid #e1e8ed;
+}
+
+.btn-secondary:hover {
+    background: #f8f9fa;
+    border-color: #bdc3c7;
+    transform: translateY(-1px);
+}
+
+.btn-success {
+    background: #27ae60;
+    color: white;
+    box-shadow: 0 2px 8px rgba(39, 174, 96, 0.2);
+}
+
+.btn-success:hover {
+    background: #229954;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-top: 1px solid #e1e8ed;
+}
+
+.url-input-group {
+    display: flex;
+    gap: 1rem;
+    align-items: end;
+    flex: 1;
+    margin-right: 2rem;
+}
+
+.url-input-group input {
+    flex: 1;
+}
+
+.info-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border: 1px solid #e1e8ed;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.info-card h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.info-card p {
+    color: #7f8c8d;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.feature-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border: 1px solid #e1e8ed;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.feature-item:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+    border-color: #3498db;
+}
+
+.feature-icon {
+    width: 24px;
+    height: 24px;
+    color: #3498db;
+}
+
+.confirmation-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 16px;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.confirmation-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 2rem;
+    background: #3498db;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2);
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1.25rem 1.75rem;
+    border-radius: 8px;
+    background: #27ae60;
+    color: white;
+    font-weight: 600;
+    z-index: 1000;
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.2);
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.error {
+    background: #e74c3c;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.2);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Enhanced responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .header {
+        padding: 2.5rem 1rem;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .header p {
+        font-size: 1.1rem;
+    }
+
+    .tabs {
+        flex-direction: column;
+    }
+
+    .tab-btn {
+        min-width: auto;
+        justify-content: flex-start;
+        padding: 1rem 1.5rem;
+    }
+
+    .upload-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .upload-zone {
+        min-height: 280px;
+        padding: 2.5rem 1rem;
+    }
+
+    .processing-features {
+        grid-template-columns: 1fr;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .url-input-group {
+        flex-direction: column;
+        align-items: stretch;
+        margin-right: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: stretch;
+    }
+
+    .feature-list {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .tab-content {
+        padding: 2rem 1rem;
+    }
+
+    .processing-info {
+        padding: 2rem;
+    }
+
+    .info-card {
+        padding: 1.5rem;
+    }
+
+    .confirmation-section {
+        padding: 2rem;
+    }
+}
+
+/* Additional enhancements */
+.form-input::placeholder {
+    color: #95a5a6;
+}
+
+.upload-zone:active {
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Smooth scrolling for tabs */
+.tabs {
+    scroll-behavior: smooth;
+}
+
+/* Enhanced focus states for accessibility */
+.btn:focus,
+.form-input:focus,
+.tab-btn:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+/* Subtle animations for better UX */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tab-content {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Enhanced gradient backgrounds */
+.upload-zone {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border: 2px dashed #e1e8ed;
+}
+
+.upload-zone:hover {
+    background: linear-gradient(135deg, #f1f3f4 0%, #ffffff 100%);
+}
+</style>
+    <div id="mainContent" class="main-content">
+
+<div class="container">
+    <div class="main-card">
+        <div class="header">
+            <div class="header-content">
+                
+                <h1>AI Agent Builder</h1>
+                <p>Create and deploy your intelligent assistant</p>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab(0)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 20h9" />
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                </svg>
+                Configuration
+            </button>
+            <button class="tab-btn" onclick="showTab(1)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                </svg>
+                Knowledge Base
+            </button>
+            <button class="tab-btn" onclick="showTab(2)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14,2 14,8 20,8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10,9 9,9 8,9" />
+                </svg>
+                Files
+            </button>
+            <button class="tab-btn" onclick="showTab(3)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Website
+            </button>
+            <button class="tab-btn" onclick="showTab(4)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20,6 9,17 4,12" />
+                </svg>
+                Deploy
+            </button>
+        </div>
+
+      <form method="post" enctype="multipart/form-data" id="aiBuilderForm" action="{% url 'xbot:create_bot' %}">
+            {% csrf_token %}
+
+            <!-- Configuration Tab -->
+            <div id="tab0" class="tab-content">
+                <div class="form-group">
+                    <label class="form-label">Bot Name *</label>
+                    <input name="bot_name" id="bot_name" type="text" class="form-input" placeholder="Enter a unique name for your bot" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea name="description" id="description" class="form-input form-textarea" placeholder="Describe what your bot does and how it can help users..."></textarea>
+                </div>
+            </div>
+
+            <!-- Knowledge Base Tab -->
+            <div id="tab1" class="tab-content hidden">
+                <div class="form-group">
+                    <label class="form-label">Knowledge Content</label>
+                    <textarea name="knowledge_base" id="knowledge_base" class="form-input" style="min-height: 250px;" placeholder="Enter the knowledge base content that your bot should reference when answering questions..."></textarea>
+                </div>
+            </div>
+
+            <!-- Files Tab -->
+            <div id="tab2" class="tab-content hidden">
+                <h2 class="section-title">Upload Documents</h2>
+
+                <div class="upload-grid">
+                    <div class="upload-zone" onclick="document.getElementById('pdf-input').click()">
+                        <div class="upload-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14,2 14,8 20,8" />
+                                <line x1="16" y1="13" x2="8" y2="13" />
+                                <line x1="16" y1="17" x2="8" y2="17" />
+                                <polyline points="10,9 9,9 8,9" />
+                            </svg>
+                        </div>
+                        <h3>PDF Documents</h3>
+                        <p>Upload PDF files to extract and process text content</p>
+                        <div class="upload-button">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7,10 12,15 17,10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            Choose PDF File
+                        </div>
+                        <input id="pdf-input" name="pdf_file" type="file" accept=".pdf" class="hidden-input">
+                        <div class="file-info">
+                            <span class="file-formats">Supported: PDF</span>
+                            <span class="file-size">Max size: 10MB</span>
+                        </div>
+                    </div>
+
+                    <div class="upload-zone" onclick="document.getElementById('word-input').click()">
+                        <div class="upload-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14,2 14,8 20,8" />
+                                <path d="M16 13H8" />
+                                <path d="M16 17H8" />
+                                <path d="M10 9H8" />
+                            </svg>
+                        </div>
+                        <h3>Word Documents</h3>
+                        <p>Upload Word documents to enhance your bot's knowledge</p>
+                        <div class="upload-button">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7,10 12,15 17,10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            Choose Word File
+                        </div>
+                        <input id="word-input" name="word_file" type="file" accept=".doc,.docx" class="hidden-input">
+                        <div class="file-info">
+                            <span class="file-formats">Supported: DOC, DOCX</span>
+                            <span class="file-size">Max size: 10MB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Website Tab -->
+            <div id="tab3" class="tab-content hidden">
+                <h2 class="section-title">Website Training</h2>
+                <p class="section-subtitle">Train your bot using content from websites</p>
+
+                <div class="form-group">
+                    <label class="form-label">Website URL</label>
+                    <div class="url-input-group">
+                        <input name="website_url" id="website_url" type="url" class="form-input" placeholder="https://example.com">
+                        <button type="button" class="btn btn-primary" onclick="trainWebsite()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3" />
+                                <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3" />
+                                <path d="M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3" />
+                                <path d="M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3" />
+                            </svg>
+                            Train
+                        </button>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>Website Training</h3>
+                    <p>Enter a website URL to extract and process its content for your bot's knowledge base. The system will crawl and index the website content.</p>
+                </div>
+            </div>
+
+            <!-- Confirmation Tab -->
+            <div id="tab4" class="tab-content hidden">
+                <h2 class="section-title">Review & Deploy</h2>
+                <p class="section-subtitle">Review your configuration and deploy your AI assistant</p>
+
+                <div class="confirmation-section">
+                    <div class="confirmation-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4" />
+                            <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3" />
+                            <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3" />
+                            <path d="M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3" />
+                            <path d="M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3" />
+                        </svg>
+                    </div>
+                    <h3 style="margin-bottom: 1rem; color: #2c3e50;">Ready to Deploy</h3>
+                    <p style="color: #7f8c8d; margin-bottom: 2rem;">Your AI assistant is configured and ready to be deployed. Click the button below to create your bot.</p>
+                    <button type="submit" class="btn btn-success" style="padding: 1rem 2rem; font-size: 1.1rem;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 18a4.6 4.4 0 0 1 0 -9A5 4.5 0 0 1 11 2h2a5 4.5 0 0 1 4 7a4.6 4.4 0 0 1 0 9H7z" />
+                        </svg>
+                        Deploy AI Assistant
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div class="controls">
+            <button type="button" class="btn btn-secondary" onclick="previousTab()" id="prevBtn" style="display: none;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15,18 9,12 15,6" />
+                </svg>
+                Previous
+            </button>
+            <button type="button" class="btn btn-primary" onclick="nextTab()" id="nextBtn">
+                Next
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9,18 15,12 9,6" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="notification" class="notification">
+    <span id="notificationText"></span>
+</div>
+</div>
+<script>
+    let currentTab = 0;
+    const totalTabs = 5;
+
+    function showTab(index) {
+        // Hide all tabs
+        for (let i = 0; i < totalTabs; i++) {
+            document.getElementById(`tab${i}`).classList.add('hidden');
+            document.querySelectorAll('.tab-btn')[i].classList.remove('active');
+        }
+
+        // Show current tab
+        document.getElementById(`tab${index}`).classList.remove('hidden');
+        document.querySelectorAll('.tab-btn')[index].classList.add('active');
+
+        // Update navigation buttons
+        document.getElementById('prevBtn').style.display = index === 0 ? 'none' : 'inline-flex';
+        document.getElementById('nextBtn').style.display = index === totalTabs - 1 ? 'none' : 'inline-flex';
+
+        // Update progress bar
+        const progressPercentage = ((index + 1) / totalTabs) * 100;
+        document.getElementById('progressFill').style.width = progressPercentage + '%';
+
+        currentTab = index;
+    }
+
+    function nextTab() {
+        if (currentTab < totalTabs - 1) {
+            showTab(currentTab + 1);
+        }
+    }
+
+    function previousTab() {
+        if (currentTab > 0) {
+            showTab(currentTab - 1);
+        }
+    }
+
+    function trainWebsite() {
+        const url = document.querySelector('input[name="website_url"]').value;
+        if (!url) {
+            showNotification('Please enter a website URL', 'error');
+            return;
+        }
+
+        const button = event.target;
+        const originalHTML = button.innerHTML;
+
+        // Show loading state
+        button.innerHTML = '<div class="spinner"></div> Training...';
+        button.disabled = true;
+
+        // Simulate training process
+        setTimeout(() => {
+            button.innerHTML = originalHTML;
+            button.disabled = false;
+            showNotification('Website training completed successfully!');
+        }, 3000);
+    }
+
+    function showNotification(message, type = 'success') {
+        const notification = document.getElementById('notification');
+        const text = document.getElementById('notificationText');
+
+        notification.className = `notification ${type}`;
+        text.textContent = message;
+        notification.classList.add('show');
+
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 4000);
+    }
+
+    // Handle file uploads with visual feedback
+    document.getElementById('pdf-input').addEventListener('change', function (e) {
+        handleFileUpload(e.target, 'PDF');
+    });
+
+    document.getElementById('word-input').addEventListener('change', function (e) {
+        handleFileUpload(e.target, 'Word');
+    });
+
+    function handleFileUpload(input, type) {
+        const file = input.files[0];
+        if (file) {
+            const uploadZone = input.closest('.upload-zone');
+            const uploadButton = uploadZone.querySelector('.upload-button');
+
+            // Show file selected state
+            uploadButton.innerHTML = `
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 12l2 2 4-4"/>
+        <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"/>
+      </svg>
+      ${file.name}
+    `;
+            uploadButton.style.background = '#27ae60';
+            uploadZone.style.borderColor = '#27ae60';
+
+            showNotification(`${type} file "${file.name}" uploaded successfully!`);
+        }
+    }
+
+    // Add drag and drop functionality
+    document.querySelectorAll('.upload-zone').forEach(zone => {
+        zone.addEventListener('dragover', function (e) {
+            e.preventDefault();
+            this.style.borderColor = '#3498db';
+            this.style.background = 'rgba(52, 152, 219, 0.05)';
+        });
+
+        zone.addEventListener('dragleave', function (e) {
+            e.preventDefault();
+            this.style.borderColor = '#e1e8ed';
+            this.style.background = '';
+        });
+
+        zone.addEventListener('drop', function (e) {
+            e.preventDefault();
+            this.style.borderColor = '#e1e8ed';
+            this.style.background = '';
+
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                const input = this.querySelector('input[type="file"]');
+                input.files = files;
+
+                // Trigger change event
+                const event = new Event('change', { bubbles: true });
+                input.dispatchEvent(event);
+            }
+        });
+    });
+
+    // Form validation
+    document.getElementById('aiBuilderForm').addEventListener('submit', function (e) {
+        const botName = document.querySelector('input[name="bot_name"]').value;
+        if (!botName.trim()) {
+            e.preventDefault();
+            showNotification('Please enter a bot name', 'error');
+            showTab(0);
+            return;
+        }
+
+        // Show loading state
+        const submitBtn = document.querySelector('button[type="submit"]');
+        submitBtn.innerHTML = '<div class="spinner"></div> Deploying...';
+        submitBtn.disabled = true;
+    });
+
+    // Initialize
+    showTab(0);
+
+    // Handle tab switching with keyboard
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight' && currentTab < totalTabs - 1) {
+            nextTab();
+        } else if (e.key === 'ArrowLeft' && currentTab > 0) {
+            previousTab();
+        }
+    });
+</script>
+
+{% endblock content %}
