@@ -1,0 +1,232 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<link rel="shortcut icon" href="./assets/images/logo/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'css/style-prefix.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<div class="product-container">
+  <div class="container">
+    <div class="product-box">
+      
+      <!-- PRODUCT FEATURED -->
+      <div class="product-featured">
+        <div class="showcase-wrapper" style="background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; margin: 20px 0;">
+          <div class="showcase-container" style="display: flex; gap: 30px; padding: 30px;">
+            <div class="showcase">
+              
+              <!-- Product Image Section -->
+              <div class="showcase-banner" style="flex: 1; max-width: 500px; position: relative; overflow: hidden; border-radius: 8px; background: #f8f9fa;">
+                <img id="main-product-img" src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; height: 450px; object-fit: contain; transition: transform 0.3s ease; cursor: zoom-in; transform-origin: center;">
+              </div>
+              
+              <!-- Product Content Section -->
+              <div class="showcase-content" style="flex: 1; padding: 0 20px;">
+                <h1 style="font-size: 28px; color: #212529; margin: 0 0 10px 0; font-weight: 600; line-height: 1.3;">{{ product.name }}</h1>
+                
+                <div style="display: flex; align-items: center; gap: 15px; margin: 15px 0;">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <div style="color: #ffc107; font-size: 18px; display: flex;">
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star-outline"></ion-icon>
+                      <ion-icon name="star-outline"></ion-icon>
+                    </div>
+                    <span style="color: #6c757d; font-weight: 500;">4.2 (1,234 ratings)</span>
+                  </div>
+                </div>
+                
+                <div style="margin: 20px 0; padding: 15px 0; border-top: 1px solid #e9ecef; border-bottom: 1px solid #e9ecef;">
+                  <div style="display: flex; align-items: baseline; gap: 15px; margin-bottom: 10px;">
+                    <span style="font-size: 32px; font-weight: 700; color: #198754;">${{ product.final_price }}</span>
+                    <span style="font-size: 20px; color: #6c757d; text-decoration: line-through;">${{ product.price }}</span>
+                    <span style="background: #d4edda; color: #155724; padding: 4px 10px; border-radius: 4px; font-size: 14px; font-weight: 600;">{{ product.discount }}% off</span>
+                  </div>
+                  <p style="color: #198754; font-weight: 500; margin: 0;">You Save: ${% widthratio product.price 1 1|floatformat:0|add:0|add:product.final_price|floatformat:0 %}</p>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                  <p style="color: #6c757d; font-size: 14px; margin: 5px 0;"><strong>Category:</strong> {{ product.main_category.name }}</p>
+                  <p style="color: #198754; font-weight: 600; margin: 5px 0;">✓ In Stock</p>
+                  <p style="color: #6c757d; font-size: 14px; margin: 5px 0;">Free delivery on orders above $50</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                  <p style="margin: 0 0 10px 0; color: #495057; font-weight: 500;">Description:</p>
+                  <p style="margin: 0; color: #6c757d; line-height: 1.5;">{{ product.description }}</p>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div style="display: flex; gap: 15px; margin: 30px 0;">
+                  <button id="add-to-cart-btn" data-product="{{ product.id }}" data-in-cart="{% if product.id in cart_items %}true{% else %}false{% endif %}" style="flex: 1; padding: 15px 25px; border: 2px solid {% if product.id in cart_items %}#28a745{% else %}#e53e3e{% endif %}; background: {% if product.id in cart_items %}#28a745{% else %}#e53e3e{% endif %}; color: white; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px;">
+                    {% if product.id in cart_items %}✓ Added to Cart{% else %}🛒 Add to Cart{% endif %}
+                  </button>
+                  
+                  <button style="flex: 1; padding: 15px 25px; border: none; background: #ff6b35; color: white; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(255, 107, 53, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    <a href="{% url 'order_view' product.pk %}" style="color: white; text-decoration: none;">⚡ Buy Now</a>
+                  </button>
+                </div>
+                
+                <div style="display: flex; gap: 20px; margin: 20px 0; padding: 15px 0; border-top: 1px solid #e9ecef;">
+                  <div style="display: flex; align-items: center; gap: 8px; color: #6c757d; font-size: 14px;">
+                    <ion-icon name="shield-checkmark" style="color: #28a745;"></ion-icon>
+                    <span>1 Year Warranty</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 8px; color: #6c757d; font-size: 14px;">
+                    <ion-icon name="refresh" style="color: #17a2b8;"></ion-icon>
+                    <span>7 Day Return</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 8px; color: #6c757d; font-size: 14px;">
+                    <ion-icon name="car" style="color: #fd7e14;"></ion-icon>
+                    <span>Fast Delivery</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECOMMENDED PRODUCTS -->
+      <div class="product-main">
+        <h2 class="title">Recommended matching Products</h2>
+        <div class="product-grid">
+          {% for product in products %}
+          <a href="{% url 'product_detail' product.pk %}" style="text-decoration: none !important; color: inherit !important; display: block;">
+            <div style="background: white !important; border-radius: 16px !important; overflow: hidden !important; box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important; position: relative !important; width: 320px !important; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important; transition: transform 0.3s ease, box-shadow 0.3s ease !important; margin: 0 !important; padding: 0 !important;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 16px 48px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px rgba(0,0,0,0.12)'">
+              
+              <div style="position: absolute !important; top: 16px !important; left: 16px !important; background: linear-gradient(135deg, #ff6b6b, #ee5a24) !important; color: white !important; padding: 8px 16px !important; font-size: 12px !important; font-weight: 600 !important; border-radius: 20px !important; z-index: 10 !important; box-shadow: 0 4px 12px rgba(238, 90, 36, 0.3) !important;">SALE</div>
+              
+              <div style="position: absolute !important; top: 16px !important; right: 16px !important; display: flex !important; flex-direction: column !important; gap: 8px !important; z-index: 10 !important;">
+                <button style="background: rgba(255, 255, 255, 0.9) !important; border: none !important; border-radius: 50% !important; width: 40px !important; height: 40px !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; backdrop-filter: blur(10px) !important; transition: all 0.3s ease !important; box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; margin: 0 !important; padding: 0 !important;" onclick="event.preventDefault(); event.stopPropagation();" onmouseover="this.style.background='rgba(255, 255, 255, 1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.9)'; this.style.transform='scale(1)'">
+                  <ion-icon name="heart-outline" style="font-size: 18px !important; color: #e53e3e !important;"></ion-icon>
+                </button>
+                <button style="background: rgba(255, 255, 255, 0.9) !important; border: none !important; border-radius: 50% !important; width: 40px !important; height: 40px !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; backdrop-filter: blur(10px) !important; transition: all 0.3s ease !important; box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; margin: 0 !important; padding: 0 !important;" onclick="event.preventDefault(); event.stopPropagation();" onmouseover="this.style.background='rgba(255, 255, 255, 1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.9)'; this.style.transform='scale(1)'">
+                  <ion-icon name="eye-outline" style="font-size: 18px !important; color: #4a5568 !important;"></ion-icon>
+                </button>
+              </div>
+              
+              <div style="position: relative !important; overflow: hidden !important; width: 100% !important; height: 240px !important;">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100% !important; height: 100% !important; object-fit: contain !important; transition: transform 0.3s ease !important; display: block !important; margin: 0 !important; padding: 0 !important;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              </div>
+              
+              <div style="padding: 24px !important; margin: 0 !important;">
+                <div style="display: inline-block !important; background: #edf2f7 !important; color: #4a5568 !important; padding: 6px 12px !important; border-radius: 16px !important; font-size: 12px !important; font-weight: 600 !important; text-transform: uppercase !important; letter-spacing: 0.5px !important; margin: 0 0 12px 0 !important;">{{ product.main_category.name }}</div>
+                
+                <h3 style="margin: 0 0 16px 0 !important; font-size: 20px !important; color: #2d3748 !important; font-weight: 600 !important; line-height: 1.4 !important; padding: 0 !important;">{{ product.name }}</h3>
+                
+                <div style="display: flex !important; align-items: baseline !important; gap: 12px !important; margin: 0 0 16px 0 !important; flex-wrap: wrap !important;">
+                  <span style="font-size: 24px !important; font-weight: 700 !important; color: #2d3748 !important; margin: 0 !important; padding: 0 !important; line-height: 1 !important;">${{ product.final_price }}</span>
+                  <span style="font-size: 16px !important; color: #a0aec0 !important; text-decoration: line-through !important; margin: 0 !important; padding: 0 !important; line-height: 1 !important;">${{ product.price }}</span>
+                  <span style="background: linear-gradient(135deg, #48bb78, #38a169) !important; color: white !important; padding: 4px 8px !important; border-radius: 12px !important; font-size: 11px !important; font-weight: 600 !important; margin: 0 !important;">{{ product.discount }}% OFF</span>
+                </div>
+                
+                <div style="display: flex !important; align-items: center !important; gap: 8px !important; margin: 0 0 20px 0 !important; flex-wrap: nowrap !important;">
+                  <div style="color: #f6ad55 !important; font-size: 16px !important; display: flex !important; align-items: center !important; margin: 0 !important; padding: 0 !important; line-height: 1 !important;">
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                  </div>
+                  <span style="color: #718096 !important; font-size: 14px !important; margin: 0 !important; padding: 0 !important; line-height: 1 !important; white-space: nowrap !important;">(4.2) • 124 reviews</span>
+                </div>
+                
+                <button class="add-to-cart-btn" data-product="{{ product.pk }}" data-in-cart="{% if product.pk in cart_items %}true{% else %}false{% endif %}" style="background: {% if product.pk in cart_items %}#6c757d{% else %}#e53e3e{% endif %} !important; color: white !important; border: none !important; padding: 14px 24px !important; border-radius: 12px !important; font-size: 16px !important; font-weight: 600 !important; cursor: pointer !important; width: 100% !important; transition: all 0.3s ease !important; box-shadow: 0 4px 16px rgba({% if product.pk in cart_items %}108, 117, 125{% else %}229, 62, 62{% endif %}, 0.3) !important; margin: 0 !important; display: block !important;" onclick="event.preventDefault(); event.stopPropagation();">{% if product.pk in cart_items %}Go to Cart{% else %}Add to Cart{% endif %}</button>
+              </div>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/script.js' %}"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script>
+'use strict';
+
+// Image hover zoom effect
+document.getElementById('main-product-img').addEventListener('mousemove', function(e) {
+    const img = this;
+    const rect = img.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    img.style.transformOrigin = `${x}% ${y}%`;
+    img.style.transform = 'scale(1.5)';
+});
+
+document.getElementById('main-product-img').addEventListener('mouseleave', function() {
+    this.style.transform = 'scale(1)';
+    this.style.transformOrigin = 'center';
+});
+
+// Main product add to cart
+document.getElementById('add-to-cart-btn').addEventListener('click', function() {
+    const productId = this.getAttribute('data-product');
+    const button = this;
+
+    fetch("{% url 'add_to_cart' %}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": "{{ csrf_token }}",
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "product_id=" + productId
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            button.innerHTML = "✓ Added to Cart";
+            button.style.background = "#28a745";
+            button.style.borderColor = "#28a745";
+        }
+    });
+});
+
+// Recommended products add to cart
+document.querySelectorAll('.add-to-cart-btn').forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        const productId = this.getAttribute('data-product');
+        const inCart = this.getAttribute('data-in-cart') === 'true';
+        
+        if (inCart) {
+            window.location.href = '/cart/';
+            return;
+        }
+        
+        fetch("{% url 'add_to_cart' %}", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}",
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: "product_id=" + productId
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                this.innerText = "Go to Cart";
+                this.style.background = "#6c757d";
+                this.setAttribute('data-in-cart', 'true');
+            }
+        });
+    });
+});
+</script>
+
+{% endblock %}

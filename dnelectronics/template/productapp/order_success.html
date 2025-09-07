@@ -1,0 +1,366 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Order Confirmed{% endblock %}
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+    * { 
+        font-family: 'Inter', sans-serif; 
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    .main-container {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .main-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="white" opacity="0.1"/><circle cx="25" cy="25" r="0.3" fill="white" opacity="0.05"/><circle cx="75" cy="75" r="0.4" fill="white" opacity="0.08"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+        opacity: 0.1;
+        animation: float 20s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-10px) rotate(1deg); }
+    }
+    
+    .success-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 
+            0 25px 50px rgba(0, 0, 0, 0.1),
+            0 0 0 1px rgba(255, 255, 255, 0.05);
+        border-radius: 24px;
+        padding: 4rem 3rem;
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+        position: relative;
+        transform: translateY(20px);
+        opacity: 0;
+        animation: slideUp 0.8s ease-out 0.2s forwards;
+    }
+    
+    @keyframes slideUp {
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    .checkmark-container {
+        position: relative;
+        margin-bottom: 2.5rem;
+    }
+    
+    .checkmark {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        position: relative;
+        transform: scale(0);
+        animation: checkmarkAppear 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.8s forwards;
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+    }
+    
+    .checkmark::before {
+        content: '';
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        border: 2px solid rgba(102, 126, 234, 0.2);
+        border-radius: 50%;
+        animation: ripple 2s ease-out infinite;
+    }
+    
+    .checkmark::after {
+        content: '';
+        position: absolute;
+        width: 140px;
+        height: 140px;
+        border: 1px solid rgba(102, 126, 234, 0.1);
+        border-radius: 50%;
+        animation: ripple 2s ease-out 0.5s infinite;
+    }
+    
+    @keyframes checkmarkAppear {
+        0% {
+            transform: scale(0) rotate(-180deg);
+        }
+        50% {
+            transform: scale(1.1) rotate(-90deg);
+        }
+        100% {
+            transform: scale(1) rotate(0deg);
+        }
+    }
+    
+    @keyframes ripple {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+    }
+    
+    .checkmark svg {
+        width: 50px;
+        height: 50px;
+        color: white;
+        stroke-width: 3;
+        stroke-dasharray: 25;
+        stroke-dashoffset: 25;
+        animation: drawCheck 0.5s ease-out 1.2s forwards;
+    }
+    
+    @keyframes drawCheck {
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+    
+    .content-wrapper {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: contentFade 0.6s ease-out 1.4s forwards;
+    }
+    
+    @keyframes contentFade {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+    }
+    
+    .subtitle {
+        color: #6b7280;
+        font-size: 1.125rem;
+        margin-bottom: 3rem;
+        line-height: 1.7;
+        font-weight: 400;
+    }
+    
+    .button-wrapper {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: buttonFade 0.6s ease-out 1.8s forwards;
+    }
+    
+    @keyframes buttonFade {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .home-button {
+        background-color: rgb(10, 165, 255);
+        color: white;
+        padding: 1.25rem 3rem;
+        border-radius: 16px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border: none;
+        cursor: pointer;
+        box-shadow: 
+            0 10px 25px rgba(31, 41, 55, 0.15),
+            0 0 0 1px rgba(255, 255, 255, 0.05);
+        position: relative;
+        overflow: hidden;
+        transform: translateY(0);
+    }
+    
+    .home-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transition: left 0.6s ease;
+    }
+    
+    .home-button:hover::before {
+        left: 100%;
+    }
+    
+    .home-button:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 
+            0 15px 35px rgba(31, 41, 55, 0.25),
+            0 0 0 1px rgba(31, 41, 55, 0.1);
+        background: #111827;
+    }
+    
+    .home-button:active {
+        transform: translateY(-1px) scale(1.01);
+    }
+    
+    .home-icon {
+        width: 18px;
+        height: 18px;
+        transition: transform 0.3s ease;
+    }
+    
+    .home-button:hover .home-icon {
+        transform: translateX(-2px);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 640px) {
+        .main-container {
+            padding: 1rem;
+        }
+        
+        .success-card {
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            margin: 1rem;
+        }
+        
+        .checkmark {
+            width: 80px;
+            height: 80px;
+        }
+        
+        .checkmark::before {
+            width: 100px;
+            height: 100px;
+        }
+        
+        .checkmark::after {
+            width: 120px;
+            height: 120px;
+        }
+        
+        .checkmark svg {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .title {
+            font-size: 2rem;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .home-button {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 280px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .success-card {
+            padding: 2.5rem 1.5rem;
+        }
+        
+        .title {
+            font-size: 1.75rem;
+        }
+    }
+    
+    /* Enhanced accessibility */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+        
+        .checkmark::before,
+        .checkmark::after {
+            animation: none;
+        }
+    }
+</style>
+
+<div class="main-container">
+    <div class="success-card">
+        <div class="checkmark-container">
+            <div class="checkmark">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="content-wrapper">
+            <h1 class="title">Order Confirmed!</h1>
+            <p class="subtitle">Thank you for your purchase. Your order has been successfully placed and will be processed shortly.</p>
+        </div>
+        
+        <div class="button-wrapper" style="display: flex; gap:10px;">
+            <a href="{% url 'home' %}" class="home-button">
+                <svg class="home-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                Home
+            </a>
+           <a href="{% url 'order_list' %}" class="home-button" style="background-color: #0d6efd; color: white;">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" 
+         viewBox="0 0 24 24" width="20" height="20">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M3 7h13v10H3V7zM16 7h2.586a1 1 0 01.707.293l2.414 2.414A1 1 0 0122 10.414V17h-6V7z" />
+        <circle cx="7.5" cy="17.5" r="1.5" />
+        <circle cx="17.5" cy="17.5" r="1.5" />
+    </svg>
+    Track
+</a>
+
+          
+        </div>
+    </div>
+</div>
+
+{% endblock %}

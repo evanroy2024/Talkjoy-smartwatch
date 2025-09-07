@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Orders{% endblock %}
+
+{% block content %}
+<div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h2 style="margin: 0; color: #333;">Orders ({{ total_orders }})</h2>
+    </div>
+
+    {% if orders %}
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px;">
+            {% for order in orders %}
+            <div style="background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 24px; border-left: 4px solid 
+                {% if order.status == 'pending' %}#ffc107{% elif order.status == 'processing' %}#17a2b8{% elif order.status == 'shipped' %}#007bff{% elif order.status == 'delivered' %}#28a745{% else %}#dc3545{% endif %};">
+                
+                <!-- Header -->
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <span style="font-weight: 600; color: #666; font-size: 14px;">Order #{{ order.id }}</span>
+                        <span style="padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; color: white; background: 
+                            {% if order.status == 'pending' %}#ffc107{% elif order.status == 'processing' %}#17a2b8{% elif order.status == 'shipped' %}#007bff{% elif order.status == 'delivered' %}#28a745{% else %}#dc3545{% endif %};">
+                            {{ order.get_status_display }}
+                        </span>
+                    </div>
+                    
+                    <!-- Progress Bar -->
+                    <div style="margin-bottom: 8px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="font-size: 12px; font-weight: 600; color: #666;">Order Progress</span>
+                            <span style="font-size: 12px; color: #666;">{{ order.progress }}%</span>
+                        </div>
+                        <div style="background: #e9ecef; height: 8px; border-radius: 4px; overflow: hidden;">
+                            <div style="height: 100%; background: {% if order.status == 'cancelled' %}#dc3545{% elif order.progress == 100 %}#28a745{% else %}linear-gradient(90deg, #007bff 0%, #17a2b8 100%){% endif %}; width: {{ order.progress }}%; transition: width 0.3s ease;"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Status Steps -->
+                    <div style="display: flex; justify-content: space-between; margin-top: 12px;">
+                        <div style="text-align: center; flex: 1;">
+                            <div style="width: 12px; height: 12px; border-radius: 50%; margin: 0 auto 4px; background: {% if order.progress >= 25 %}#28a745{% else %}#e9ecef{% endif %};"></div>
+                            <span style="font-size: 10px; color: {% if order.progress >= 25 %}#28a745{% else %}#999{% endif %};">Pending</span>
+                        </div>
+                        <div style="text-align: center; flex: 1;">
+                            <div style="width: 12px; height: 12px; border-radius: 50%; margin: 0 auto 4px; background: {% if order.progress >= 50 %}#28a745{% else %}#e9ecef{% endif %};"></div>
+                            <span style="font-size: 10px; color: {% if order.progress >= 50 %}#28a745{% else %}#999{% endif %};">Processing</span>
+                        </div>
+                        <div style="text-align: center; flex: 1;">
+                            <div style="width: 12px; height: 12px; border-radius: 50%; margin: 0 auto 4px; background: {% if order.progress >= 75 %}#28a745{% else %}#e9ecef{% endif %};"></div>
+                            <span style="font-size: 10px; color: {% if order.progress >= 75 %}#28a745{% else %}#999{% endif %};">Shipped</span>
+                        </div>
+                        <div style="text-align: center; flex: 1;">
+                            <div style="width: 12px; height: 12px; border-radius: 50%; margin: 0 auto 4px; background: {% if order.progress >= 100 %}#28a745{% else %}#e9ecef{% endif %};"></div>
+                            <span style="font-size: 10px; color: {% if order.progress >= 100 %}#28a745{% else %}#999{% endif %};">Delivered</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product -->
+                <div style="display: flex; align-items: center; margin-bottom: 20px; padding: 12px; background: #f8f9fa; border-radius: 8px;">
+                    {% if order.product.image %}
+                        <img src="{{ order.product.image.url }}" style="width: 60px; height: 60px; border-radius: 8px; object-fit: cover; margin-right: 12px;">
+                    {% else %}
+                        <div style="width: 60px; height: 60px; background: #e9ecef; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">📦</div>
+                    {% endif %}
+                    <div>
+                        <div style="font-weight: 600; color: #333; margin-bottom: 4px;">{{ order.product.name }}</div>
+                        <div style="color: #666; font-size: 14px;">Qty: {{ order.quantity }} • ₹{{ order.total_price }}</div>
+                    </div>
+                </div>
+
+                <!-- Customer -->
+                <div style="margin-bottom: 16px;">
+                    <div style="font-weight: 600; color: #333; margin-bottom: 8px;">{{ order.full_name }}</div>
+                    <div style="color: #666; font-size: 14px; margin-bottom: 4px;">📱 {{ order.phone }}</div>
+                    <div style="color: #666; font-size: 14px;">📍 {{ order.city }}, {{ order.get_state_display }} - {{ order.pincode }}</div>
+                </div>
+
+                <!-- Address -->
+                <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; margin-bottom: 16px;">
+                    <div style="font-size: 14px; color: #666;">{{ order.address }}</div>
+                </div>
+
+                <!-- Details Grid -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+                    <div style="text-align: center; padding: 12px; background: #e3f2fd; border-radius: 8px;">
+                        <div style="font-size: 12px; color: #1976d2; font-weight: 600; margin-bottom: 4px;">DELIVERY TIME</div>
+                        <div style="font-size: 14px; color: #333;">{{ order.get_delivery_time_display }}</div>
+                    </div>
+                    <div style="text-align: center; padding: 12px; background: #e8f5e8; border-radius: 8px;">
+                        <div style="font-size: 12px; color: #2e7d32; font-weight: 600; margin-bottom: 4px;">PAYMENT</div>
+                        <div style="font-size: 14px; color: #333;">{{ order.get_payment_method_display }}</div>
+                    </div>
+                </div>
+
+                {% if order.additional_info %}
+                <div style="background: #fff3cd; padding: 12px; border-radius: 8px; margin-bottom: 16px;">
+                    <div style="font-size: 12px; color: #856404; font-weight: 600; margin-bottom: 4px;">ADDITIONAL INFO</div>
+                    <div style="font-size: 14px; color: #856404;">{{ order.additional_info }}</div>
+                </div>
+                {% endif %}
+
+                <!-- Footer -->
+                <div style="border-top: 1px solid #e9ecef; padding-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="color: #666; font-size: 12px;">{{ order.created_at|date:"M d, Y H:i" }}</div>
+                    <div style="font-size: 18px; font-weight: 700; color: #28a745;">₹{{ order.total_price }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <div style="text-align: center; padding: 60px 20px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <div style="font-size: 48px; margin-bottom: 16px;">📦</div>
+            <h3 style="color: #666; margin-bottom: 8px;">No Orders Found</h3>
+            <p style="color: #999;">There are no orders to display.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

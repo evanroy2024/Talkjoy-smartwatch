@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<style>
+.about-root { --primary: #1e293b; --secondary: #64748b; --accent: #2563eb; --light: #f1f5f9; }
+.about-main { max-width: 1200px; margin: 2rem auto; padding: 0 2rem; }
+.about-founder { display: flex; align-items: flex-start; gap: 3rem; padding: 2rem 0; }
+.about-image-wrapper { flex-shrink: 0; }
+.about-image { width: 400px; height: 400px; border-radius: 50%; object-fit: cover; transition: transform 0.3s ease; box-shadow: 0 10px 30px rgba(30, 41, 59, 0.15); }
+.about-image:hover { transform: scale(1.02); }
+.about-text { flex: 1; padding-left: 1rem; }
+.about-title { color: var(--primary); font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem; line-height: 1.2; }
+.about-subtitle { color: var(--accent); font-size: 1.1rem; font-weight: 500; margin-bottom: 1.5rem; }
+.about-description { color: var(--secondary); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.2rem; }
+.about-quote { color: var(--primary); font-size: 1.1rem; font-style: italic; border-left: 3px solid var(--accent); padding-left: 1.5rem; margin: 1.5rem 0; }
+.about-platform { background: var(--light); padding: 3rem 0; margin-top: 2rem; }
+.about-platform-content { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.about-platform h2 { color: var(--primary); font-size: 2.2rem; font-weight: 700; margin-bottom: 2rem; text-align: center; }
+.about-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
+.about-card { background: white; padding: 2rem; border-radius: 6px; box-shadow: 0 2px 8px rgba(30, 41, 59, 0.08); }
+.about-card h3 { color: var(--primary); font-size: 1.2rem; font-weight: 600; margin-bottom: 0.8rem; }
+.about-card p { color: var(--secondary); line-height: 1.6; }
+@media (max-width: 768px) {
+  .about-founder { flex-direction: column; align-items: center; text-align: center; gap: 2rem; }
+  .about-image { width: 300px; height: 300px; }
+  .about-text { padding-left: 0; }
+  .about-title { font-size: 2.2rem; }
+}
+</style>
+
+<div class="about-root">
+  <div class="about-main">
+    <div class="about-founder">
+      <div class="about-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=500&fit=crop&crop=face" alt="Founder" class="about-image">
+      </div>
+      <div class="about-text">
+        <h1 class="about-title">Michael Rodriguez</h1>
+        <p class="about-subtitle">Founder & Chief Executive Officer</p>
+        <p class="about-description">Michael is a visionary entrepreneur with over 18 years of experience in technology and business development. He previously served as VP of Engineering at two unicorn startups and has a proven track record of scaling products from concept to millions of users.</p>
+        <p class="about-quote">"Great products are born from understanding real problems and crafting elegant solutions that users love."</p>
+        <p class="about-description">Under his leadership, our platform has grown to serve over 500,000 users worldwide while maintaining a 98% customer satisfaction rate.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-platform">
+    <div class="about-platform-content">
+      <h2>Our Platform</h2>
+      <div class="about-cards">
+        <div class="about-card">
+          <h3>Cutting-Edge Technology</h3>
+          <p>Built on modern cloud infrastructure with advanced security protocols, ensuring 99.99% uptime and enterprise-grade reliability for all users.</p>
+        </div>
+        <div class="about-card">
+          <h3>User Experience Focus</h3>
+          <p>Every feature is designed with extensive user testing and feedback, creating intuitive interfaces that users actually enjoy using.</p>
+        </div>
+        <div class="about-card">
+          <h3>Scalable Solutions</h3>
+          <p>Our architecture supports growth from startup to enterprise, with flexible pricing and features that adapt to your needs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

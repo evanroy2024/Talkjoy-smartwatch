@@ -1,0 +1,432 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Checkout - Complete Your Purchase{% endblock %}
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    header{
+        margin-left: 6%;
+        margin-right: 6%;
+    }
+    * { font-family: 'Inter', sans-serif; }
+</style>
+
+<div class="max-w-7xl mx-auto px-10 py-8">
+    <h1 class="text-2xl font-semibold text-gray-900 mb-8">Checkout</h1>
+    
+    <div class="grid lg:grid-cols-12 gap-8">
+        <!-- Main Form -->
+        <div class="lg:col-span-8">
+            <form id="checkoutForm" method="POST" enctype="multipart/form-data" class="space-y-6">
+                {% csrf_token %}
+                <!-- Delivery Information -->
+                <div class="bg-white rounded-lg border border-gray-200 p-6">
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Delivery Information</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                            <input type="text" name="fullName" id="fullName" required 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                            <input type="tel" name="phone" id="phone" required 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Address</label>
+                        <input type="text" name="address" id="address" required placeholder="House No, Street, Area"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">City</label>
+                            <input type="text" name="city" id="city" required 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">State</label>
+                            <select name="state" id="state" required 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">Select State</option>
+                                <option value="west-bengal">West Bengal</option>
+                                <option value="maharashtra">Maharashtra</option>
+                                <option value="delhi">Delhi</option>
+                                <option value="karnataka">Karnataka</option>
+                                <option value="tamil-nadu">Tamil Nadu</option>
+                                <option value="uttar-pradesh">Uttar Pradesh</option>
+                                <option value="gujarat">Gujarat</option>
+                                <option value="rajasthan">Rajasthan</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Pincode</label>
+                            <input type="text" name="pincode" id="pincode" required maxlength="6"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delivery Time -->
+                <div class="bg-white rounded-lg border border-gray-200 p-6">
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Delivery Time</h2>
+                    <input type="hidden" name="deliveryTime" id="deliveryTimeInput">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="delivery-option border border-gray-300 rounded-lg p-4 cursor-pointer hover:border-blue-300 transition-all"
+                             data-value="6am-10am">
+                            <div class="font-medium text-gray-900">6:00 AM - 10:00 AM</div>
+                            <div class="text-sm text-gray-500">Morning</div>
+                        </div>
+                        <div class="delivery-option border border-gray-300 rounded-lg p-4 cursor-pointer hover:border-blue-300 transition-all"
+                             data-value="12pm-4pm">
+                            <div class="font-medium text-gray-900">12:00 PM - 4:00 PM</div>
+                            <div class="text-sm text-gray-500">Afternoon</div>
+                        </div>
+                        <div class="delivery-option border border-gray-300 rounded-lg p-4 cursor-pointer hover:border-blue-300 transition-all"
+                             data-value="4pm-10pm">
+                            <div class="font-medium text-gray-900">4:00 PM - 10:00 PM</div>
+                            <div class="text-sm text-gray-500">Evening</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Method -->
+                <div class="bg-white rounded-lg border border-gray-200 p-6">
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Payment Method</h2>
+                    <input type="hidden" name="paymentMethod" id="paymentMethodInput">
+                    <div class="space-y-3">
+                        <div class="payment-option border border-gray-300 rounded-lg p-4 cursor-pointer hover:border-blue-300 transition-all flex items-center"
+                             data-value="upi">
+                            <div class="text-2xl mr-4">📱</div>
+                            <div>
+                                <div class="font-medium text-gray-900">UPI Payment</div>
+                                <div class="text-sm text-gray-500">Google Pay, PhonePe, Paytm</div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-option border border-gray-300 rounded-lg p-4 cursor-pointer hover:border-blue-300 transition-all flex items-center"
+                             data-value="card">
+                            <div class="text-2xl mr-4">💳</div>
+                            <div>
+                                <div class="font-medium text-gray-900">Credit/Debit Card</div>
+                                <div class="text-sm text-gray-500">Visa, MasterCard, Rupay</div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-option border border-gray-300 rounded-lg p-4 cursor-pointer hover:border-blue-300 transition-all flex items-center"
+                             data-value="cod">
+                            <div class="text-2xl mr-4">💵</div>
+                            <div>
+                                <div class="font-medium text-gray-900">Cash on Delivery</div>
+                                <div class="text-sm text-gray-500">Pay when you receive (+₹50 charges)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Popup -->
+                <div id="payment-popup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; align-items: flex-start; justify-content: center; padding-top: 5px; box-sizing: border-box;">
+                    <div style="background: white; padding: 30px; border-radius: 16px; text-align: center; max-width: 450px; width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
+                        <div style="background: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                            <p id="popup-total" style="margin: 0; color: #1f2937; font-size: 18px; font-weight: 600;">
+                                Total Amount to Pay: ${{ total_amount }}
+                            </p>
+                        </div>
+                        
+                        <h3 style="margin: 0 0 20px 0; color: #1f2937; font-size: 20px; font-weight: 600;">Please Make Payment</h3>
+                        
+                        <img id="payment-qr" src="{% static 'pay.jpg' %}" alt="Payment QR Code" style="width: 280px; height: 280px; margin: 0 auto 15px; border: 2px solid #e5e7eb; border-radius: 12px; display: block;">
+                        
+                        <div id="payment-id" style="margin: 0 0 20px 0; color: #374151; font-size: 16px; font-weight: 500;">
+                            UPI ID - adsadfadsa
+                        </div>
+                        
+                        <p style="margin: 0 0 25px 0; color: #6b7280; font-size: 14px; line-height: 1.5;">
+                            Scan the QR code to complete your payment, then close this popup and upload screenshot or enter transaction ID below.
+                        </p>
+                        
+                        <div style="text-align: center;">
+                            <button id="cancel-payment" type="button" style="background: #ef4444; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; transition: background 0.2s; display: inline-block;">
+                                Close & Upload Proof
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transaction Proof Section -->
+                <div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 24px; margin: 24px 0; background: #f8fafc;">
+                    <p style="margin: 0 0 20px 0; color: #dc2626; font-weight: 600; text-align: center; font-size: 16px;">
+                        * Please fill one of these for proof (Required)
+                    </p>
+                    
+                    <div style="margin-bottom: 16px;">
+                        <label for="transaction_id" style="display: block; margin-bottom: 6px; color: #374151; font-weight: 500; font-size: 14px;">
+                            Transaction ID
+                        </label>
+                        <input type="text" id="transaction_id" name="transaction_id" 
+                               style="width: 100%; padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box; background: #fff;"
+                               placeholder="Enter your transaction ID"
+                               oninput="validateProofFields()">
+                    </div>
+                    
+                    <div style="text-align: center; margin: 16px 0; color: #6b7280; font-size: 14px; font-weight: 500;">
+                        OR
+                    </div>
+                    
+                    <div>
+                        <label for="transaction_proof" style="display: block; margin-bottom: 6px; color: #374151; font-weight: 500; font-size: 14px;">
+                            Upload Payment Screenshot
+                        </label>
+                        <input type="file" id="transaction_proof" name="transaction_proof" 
+                               style="width: 100%; padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box; background: #fff;"
+                               accept="image/*"
+                               onchange="validateProofFields()">
+                    </div>
+                </div>
+                
+                <!-- Place Order Button -->
+                <button type="submit" 
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                    Place Order
+                </button>
+            </form>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="lg:col-span-4">
+            <div class="bg-white rounded-lg border border-gray-200 p-6 sticky top-4">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Order Summary</h3>
+                
+                <!-- Cart Items -->
+                <div class="space-y-4 mb-6 pb-4 border-b border-gray-200">
+                    {% for item in cart_items %}
+                    <div class="flex items-center gap-3">
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" 
+                             class="w-12 h-12 object-cover rounded-lg border border-gray-200">
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-900 text-sm">{{ item.product.name }}</h4>
+                            <p class="text-xs text-gray-500">Qty: {{ item.quantity }}</p>
+                        </div>
+                        <div class="text-sm font-medium text-gray-900">${{ item.product.final_price }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- Price Breakdown -->
+                <div class="space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Subtotal ({{ cart_items.count }} items):</span>
+                        <span id="itemPrice" class="text-gray-900">${{ subtotal }}</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Delivery:</span>
+                        <span class="text-gray-900">${{ delivery_charges }}</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Tax:</span>
+                        <span class="text-gray-900">${{ tax }}</span>
+                    </div>
+                    <div id="codCharge" class="flex justify-between text-sm hidden">
+                        <span class="text-gray-600">COD Charges:</span>
+                        <span class="text-gray-900">$2.00</span>
+                    </div>
+                    <div class="flex justify-between font-semibold text-lg pt-3 border-t border-gray-200">
+                        <span class="text-gray-900">Total:</span>
+                        <span id="totalAmount" class="text-gray-900">${{ total_amount }}</span>
+                    </div>
+                </div>
+                
+                <!-- Benefits -->
+                <div class="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
+                    <div class="flex items-center text-green-700 mb-2">
+                        <span class="mr-2">✓</span>
+                        <span class="text-sm">Free delivery on orders over $50</span>
+                    </div>
+                    <div class="flex items-center text-green-700">
+                        <span class="mr-2">✓</span>
+                        <span class="text-sm">30-day return policy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const baseSubtotal = parseFloat('{{ subtotal }}');
+    let selectedDelivery = '';
+    let selectedPayment = '';
+
+    // Update Popup Price
+    function updatePopupPrice() {
+        const deliveryCharges = parseFloat('{{ delivery_charges }}');
+        const tax = parseFloat('{{ tax }}');
+        const codChargeEl = document.getElementById('codCharge');
+        
+        let total = baseSubtotal + deliveryCharges + tax;
+        
+        if (!codChargeEl.classList.contains('hidden')) {
+            total += 2.00;
+        }
+        
+        // Update popup total
+        const popupTotal = document.getElementById('popup-total');
+        if (popupTotal) {
+            popupTotal.innerHTML = `Total Amount to Pay: $${total.toFixed(2)}`;
+        }
+    }
+
+    // Update Total Amount
+    function updateTotal() {
+        const deliveryCharges = parseFloat('{{ delivery_charges }}');
+        const tax = parseFloat('{{ tax }}');
+        const codChargeEl = document.getElementById('codCharge');
+        
+        let total = baseSubtotal + deliveryCharges + tax;
+        
+        if (!codChargeEl.classList.contains('hidden')) {
+            total += 2.00;
+        }
+        
+        document.getElementById('totalAmount').textContent = '$' + total.toFixed(2);
+    }
+
+    // Delivery Time Selection
+    document.querySelectorAll('.delivery-option').forEach(option => {
+        option.addEventListener('click', function() {
+            document.querySelectorAll('.delivery-option').forEach(opt => {
+                opt.classList.remove('selected');
+                opt.style.borderColor = '#d1d5db';
+                opt.style.backgroundColor = 'white';
+            });
+            this.classList.add('selected');
+            this.style.borderColor = '#3b82f6';
+            this.style.backgroundColor = '#eff6ff';
+            selectedDelivery = this.dataset.value;
+            document.getElementById('deliveryTimeInput').value = selectedDelivery;
+        });
+    });
+
+    // Payment Method Selection and Popup
+    document.querySelectorAll('.payment-option').forEach(option => {
+        option.addEventListener('click', function() {
+            document.querySelectorAll('.payment-option').forEach(opt => {
+                opt.classList.remove('selected');
+                opt.style.borderColor = '#d1d5db';
+                opt.style.backgroundColor = 'white';
+            });
+            this.classList.add('selected');
+            this.style.borderColor = '#3b82f6';
+            this.style.backgroundColor = '#eff6ff';
+            selectedPayment = this.dataset.value;
+            document.getElementById('paymentMethodInput').value = selectedPayment;
+            
+            const codChargeEl = document.getElementById('codCharge');
+            if (this.dataset.value === 'cod') {
+                codChargeEl.classList.remove('hidden');
+            } else {
+                codChargeEl.classList.add('hidden');
+            }
+            updateTotal();
+            
+            // Show popup for UPI and Card payments
+            if (selectedPayment === 'upi' || selectedPayment === 'card') {
+                const paymentId = document.getElementById('payment-id');
+                if (selectedPayment === 'upi') {
+                    paymentId.textContent = 'UPI ID - adsadfadsa';
+                } else if (selectedPayment === 'card') {
+                    paymentId.textContent = 'Card Payment - adsadfadsa';
+                }
+                
+                // Update popup price before showing
+                updatePopupPrice();
+                
+                document.getElementById('payment-popup').style.display = 'flex';
+            }
+        });
+    });
+
+    // Popup Controls
+    document.getElementById('cancel-payment').addEventListener('click', function() {
+        document.getElementById('payment-popup').style.display = 'none';
+    });
+    
+    document.getElementById('payment-popup').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.style.display = 'none';
+        }
+    });
+    
+    // Hover effects for cancel button
+    const cancelBtn = document.getElementById('cancel-payment');
+    cancelBtn.addEventListener('mouseenter', function() {
+        this.style.background = '#dc2626';
+    });
+    cancelBtn.addEventListener('mouseleave', function() {
+        this.style.background = '#ef4444';
+    });
+
+    // Transaction Proof Validation
+    window.validateProofFields = function() {
+        const transactionId = document.getElementById('transaction_id').value.trim();
+        const transactionProof = document.getElementById('transaction_proof').files.length;
+        
+        // Remove required attribute from both fields first
+        document.getElementById('transaction_id').removeAttribute('required');
+        document.getElementById('transaction_proof').removeAttribute('required');
+        
+        // If both are empty, make transaction_id required
+        if (!transactionId && transactionProof === 0) {
+            document.getElementById('transaction_id').setAttribute('required', 'required');
+        }
+    }
+
+    // Set initial required state
+    document.getElementById('transaction_id').setAttribute('required', 'required');
+
+    // Pincode validation
+    document.getElementById('pincode').addEventListener('input', function(e) {
+        this.value = this.value.replace(/\D/g, '');
+    });
+
+    // Form Submission
+    document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+        const requiredFields = ['fullName', 'phone', 'address', 'city', 'state', 'pincode'];
+        let isValid = true;
+        
+        // Validate form fields
+        requiredFields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (!field.value.trim()) {
+                isValid = false;
+                field.style.borderColor = '#ef4444';
+            } else {
+                field.style.borderColor = '#d1d5db';
+            }
+        });
+        
+        // Validate delivery and payment selection
+        if (!selectedDelivery || !selectedPayment) {
+            isValid = false;
+            alert('Please select delivery time and payment method.');
+            e.preventDefault();
+            return;
+        }
+        
+        if (!isValid) {
+            alert('Please fill in all required fields.');
+            e.preventDefault();
+        }
+    });
+});
+</script>
+
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}

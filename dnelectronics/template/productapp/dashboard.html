@@ -1,0 +1,1289 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/logo/favicon.ico" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+<link rel="stylesheet" href="{% static 'css/style-prefix.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+<nav class="desktop-navigation-menu">
+  <div class="container">
+    <ul class="desktop-menu-category-list">
+
+      <!-- Home -->
+      <li class="menu-category">
+        <a href="index.html" class="menu-title">Home</a>
+      </li>
+
+      <!-- Categories -->
+      <li class="menu-category">
+        <a href="#" class="menu-title">Categories</a>
+        <div class="dropdown-panel">
+
+          <!-- Electronics -->
+          <ul class="dropdown-panel-list">
+            <li class="menu-title"><a href="categories/">Electronics</a></li>
+            <li class="panel-list-item"><a href="categories/">Desktop</a></li>
+            <li class="panel-list-item"><a href="categories/">Laptop</a></li>
+            <li class="panel-list-item"><a href="categories/">Camera</a></li>
+            <li class="panel-list-item"><a href="categories/">Tablet</a></li>
+            <li class="panel-list-item"><a href="categories/">Headphone</a></li>
+            <li class="panel-list-item">
+              <a href="categories/">
+                <img src="https://images.unsplash.com/photo-1593267891718-17abae428da0?q=80&w=1174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                     alt="Electronics" style="width:250px; height:119px; object-fit:cover; display:block;">
+              </a>
+            </li>
+          </ul>
+
+          <!-- Men's Fashion -->
+          <ul class="dropdown-panel-list">
+            <li class="menu-title"><a href="categories/">Men's</a></li>
+            <li class="panel-list-item"><a href="categories/">Formal</a></li>
+            <li class="panel-list-item"><a href="categories/">Casual</a></li>
+            <li class="panel-list-item"><a href="categories/">Sports</a></li>
+            <li class="panel-list-item"><a href="categories/">Jacket</a></li>
+            <li class="panel-list-item"><a href="categories/">Sunglasses</a></li>
+            <li class="panel-list-item">
+              <a href="categories/">
+                <img src="https://images.unsplash.com/photo-1753161029353-f6bb0ff2ad3c?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                     alt="Men's Fashion" style="width:250px; height:119px; object-fit:cover; display:block;">
+              </a>
+            </li>
+          </ul>
+
+          <!-- Women's Fashion -->
+          <ul class="dropdown-panel-list">
+            <li class="menu-title"><a href="categories/">Women's</a></li>
+            <li class="panel-list-item"><a href="categories/">Formal</a></li>
+            <li class="panel-list-item"><a href="categories/">Casual</a></li>
+            <li class="panel-list-item"><a href="categories/">Bags</a></li>
+            <li class="panel-list-item"><a href="categories/">Cosmetics</a></li>
+            <li class="panel-list-item"><a href="categories/">Accessories</a></li>
+            <li class="panel-list-item">
+              <a href="categories/">
+                <img src="https://images.unsplash.com/photo-1753161021364-3f92c95b282c?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                     alt="Women's Fashion" style="width:250px; height:119px; object-fit:cover; display:block;">
+              </a>
+            </li>
+          </ul>
+
+          <!-- Smart Gadgets -->
+          <ul class="dropdown-panel-list">
+            <li class="menu-title"><a href="categories/">Smart Gadgets</a></li>
+            <li class="panel-list-item"><a href="categories/">Smart Watch</a></li>
+            <li class="panel-list-item"><a href="categories/">Smart TV</a></li>
+            <li class="panel-list-item"><a href="categories/">Keyboard</a></li>
+            <li class="panel-list-item"><a href="categories/">Mouse</a></li>
+            <li class="panel-list-item"><a href="categories/">Microphone</a></li>
+            <li class="panel-list-item">
+              <a href="categories/">
+                <img src="https://images.unsplash.com/photo-1713693212309-acdbf3a3feb4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                     alt="Smart Gadgets" style="width:250px; height:119px; object-fit:cover; display:block;">
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </li>
+
+      <!-- About with dropdown -->
+      <li class="menu-category">
+        <a href="#" class="menu-title">About</a>
+        <ul class="dropdown-list">
+          <li class="dropdown-item"><a href="about-company.html">Our Company</a></li>
+          <li class="dropdown-item"><a href="about-team.html">Our Team</a></li>
+          <li class="dropdown-item"><a href="about-careers.html">Careers</a></li>
+          <li class="dropdown-item"><a href="about-mission.html">Mission & Vision</a></li>
+        </ul>
+      </li>
+
+      <!-- Contact -->
+      <li class="menu-category">
+        <a href="contact.html" class="menu-title">Contact</a>
+      </li>
+
+      <!-- Cart -->
+      <li class="menu-category">
+        <a href="cart/" class="menu-title">Cart</a>
+      </li>
+
+      <!-- Profile -->
+      <li class="menu-category">
+        <a href="account/" class="menu-title">Profile</a>
+      </li>
+
+      <!-- Hot Offers -->
+      <li class="menu-category">
+        <a href="offers.html" class="menu-title">Hot Offers</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+
+
+    <div class="mobile-bottom-navigation">
+
+      <button class="action-btn" data-mobile-menu-open-btn>
+        <ion-icon name="menu-outline"></ion-icon>
+      </button>
+
+      <button class="action-btn">
+        <ion-icon name="bag-handle-outline"></ion-icon>
+
+        <span class="count">0</span>
+      </button>
+
+      <button class="action-btn">
+        <ion-icon name="home-outline"></ion-icon>
+      </button>
+
+      <button class="action-btn">
+        <ion-icon name="heart-outline"></ion-icon>
+
+        <span class="count">0</span>
+      </button>
+
+      <button class="action-btn" data-mobile-menu-open-btn>
+        <ion-icon name="grid-outline"></ion-icon>
+      </button>
+
+    </div>
+
+    <nav class="mobile-navigation-menu  has-scrollbar" data-mobile-menu>
+
+      <div class="menu-top">
+        <h2 class="menu-title">Menu</h2>
+
+        <button class="menu-close-btn" data-mobile-menu-close-btn>
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+
+      <ul class="mobile-menu-category-list">
+
+        <li class="menu-category">
+          <a href="#" class="menu-title">Home</a>
+        </li>
+
+        <li class="menu-category">
+
+          <button class="accordion-menu" data-accordion-btn>
+            <p class="menu-title">Men's</p>
+
+            <div>
+              <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+            </div>
+          </button>
+
+          <ul class="submenu-category-list" data-accordion>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Shirt</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Shorts & Jeans</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Safety Shoes</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Wallet</a>
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="menu-category">
+
+          <button class="accordion-menu" data-accordion-btn>
+            <p class="menu-title">Women's</p>
+
+            <div>
+              <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+            </div>
+          </button>
+
+          <ul class="submenu-category-list" data-accordion>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Dress & Frock</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Earrings</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Necklace</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Makeup Kit</a>
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="menu-category">
+
+          <button class="accordion-menu" data-accordion-btn>
+            <p class="menu-title">Jewelry</p>
+
+            <div>
+              <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+            </div>
+          </button>
+
+          <ul class="submenu-category-list" data-accordion>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Earrings</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Couple Rings</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Necklace</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Bracelets</a>
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="menu-category">
+
+          <button class="accordion-menu" data-accordion-btn>
+            <p class="menu-title">Perfume</p>
+
+            <div>
+              <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+            </div>
+          </button>
+
+          <ul class="submenu-category-list" data-accordion>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Clothes Perfume</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Deodorant</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Flower Fragrance</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Air Freshener</a>
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="menu-category">
+          <a href="#" class="menu-title">Blog</a>
+        </li>
+
+        <li class="menu-category">
+          <a href="#" class="menu-title">Hot Offers</a>
+        </li>
+
+      </ul>
+
+      <div class="menu-bottom">
+
+        <ul class="menu-category-list">
+
+          <li class="menu-category">
+
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Language</p>
+
+              <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">English</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Espa&ntilde;ol</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Fren&ccedil;h</a>
+              </li>
+
+            </ul>
+
+          </li>
+
+          <li class="menu-category">
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Currency</p>
+              <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">USD &dollar;</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">EUR &euro;</a>
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+
+        <ul class="menu-social-container">
+
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </nav>
+
+
+    <!--
+      - CATEGORY
+    -->
+<div class="category">
+
+      <div class="container">
+
+        <div class="category-item-container has-scrollbar">
+
+          {% for category in categories %}
+          <div class="category-item">
+
+            <div class="category-img-box">
+              {% if category.image %}
+                <img src="{{ category.image.url }}" alt="{{ category.name }}" width="30">
+              {% else %}
+                <img src="{% static 'img/1.jpg' %}" alt="{{ category.name }}" width="30">
+              {% endif %}
+            </div>
+
+            <div class="category-content-box">
+
+              <div class="category-content-flex">
+                <h3 class="category-item-title">{{ category.name }}</h3>
+
+                <p class="category-item-amount">({{ category.products.count }})</p>
+              </div>
+
+              <a href="{% url 'category_filter' category.id %}" class="category-btn">Show all</a>
+
+            </div>
+
+          </div>
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+<div class="banner">
+      <div class="container">
+        <div class="slider-container has-scrollbar">
+          <div class="slider-item">
+            <img src="{% static '13.png' %}" alt="premium phone cases collection" class="banner-img">
+            <div class="banner-content">
+              <p class="banner-subtitle">New Arrivals</p>
+              <h2 class="banner-title">Premium Phone Cases</h2>
+              <p class="banner-text">
+                starting at &dollar; <b>12</b>.99
+              </p>
+              <a href="javascript:void(0);" onclick="scrollDown()" class="banner-btn">Shop now</a>
+            </div>
+          </div>
+
+          <div class="slider-item">
+            <img src="{% static '14.png' %}" alt="wireless chargers and accessories" class="banner-img">
+            <div class="banner-content">
+              <p class="banner-subtitle">Tech Essentials</p>
+              <h2 class="banner-title">Wireless Chargers & Accessories</h2>
+              <p class="banner-text">
+                starting at &dollar; <b>19</b>.99
+              </p>
+              <a href="javascript:void(0);" onclick="scrollDown()" class="banner-btn">Shop now</a>
+            </div>
+          </div>
+
+          <div class="slider-item">
+            <img src="{% static '15.png' %}" alt="screen protectors mega sale" class="banner-img">
+            <div class="banner-content">
+              <p class="banner-subtitle">Mega Sale</p>
+              <h2 class="banner-title">Screen Protectors & Covers</h2>
+              <p class="banner-text">
+                starting at &dollar; <b>7</b>.99
+              </p>
+              <a href="javascript:void(0);" onclick="scrollDown()" class="banner-btn">Shop now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.slider-item');
+      const totalSlides = slides.length;
+
+      // Set initial styles
+      slides.forEach((slide, i) => {
+        if (i === 0) {
+          slide.style.display = 'block';
+          slide.style.transform = 'translateX(0)';
+          slide.style.transition = 'transform 0.6s ease-in-out';
+        } else {
+          slide.style.display = 'block';
+          slide.style.transform = 'translateX(100%)';
+          slide.style.transition = 'transform 0.6s ease-in-out';
+          slide.style.position = 'absolute';
+          slide.style.top = '0';
+          slide.style.left = '0';
+          slide.style.width = '100%';
+          slide.style.height = '100%';
+        }
+      });
+
+      // Set container position
+      const container = document.querySelector('.slider-container');
+      container.style.position = 'relative';
+      container.style.overflow = 'hidden';
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          if (i === index) {
+            slide.style.transform = 'translateX(0)';
+          } else if (i < index) {
+            slide.style.transform = 'translateX(-100%)';
+          } else {
+            slide.style.transform = 'translateX(100%)';
+          }
+        });
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
+      }
+
+      // Auto-advance every 3 seconds
+      setInterval(nextSlide, 3000);
+
+      // Scroll down function for shop now buttons
+      window.scrollDown = function() {
+        window.scrollBy({
+          top: 700,
+          behavior: 'smooth'
+        });
+      }
+    </script>
+
+
+
+
+    <!--
+      - PRODUCT
+    -->
+
+    <div class="product-container">
+
+      <div class="container">
+
+
+
+
+        <div class="product-box">
+
+          <!--
+            - PRODUCT MINIMAL
+          -->
+
+
+          <!--
+            - PRODUCT FEATURED
+          -->
+
+          <!--
+            - PRODUCT GRID
+          -->
+
+          <div class="product-main">
+
+            <h2 class="title">New Products</h2>
+
+            <div class="product-grid">
+
+{% for product in products %}
+<a href="{% url 'product_detail' product.pk %}" style="text-decoration: none !important; color: inherit !important; display: block;">
+    <div style="background: white !important; border-radius: 16px !important; overflow: hidden !important; box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important; position: relative !important; width: 320px !important; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important; transition: transform 0.3s ease, box-shadow 0.3s ease !important; margin: 0 !important; padding: 0 !important;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 16px 48px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px rgba(0,0,0,0.12)'">
+        
+        <!-- Sale Badge -->
+        <div style="position: absolute !important; top: 16px !important; left: 16px !important; background: linear-gradient(135deg, #ff6b6b, #ee5a24) !important; color: white !important; padding: 8px 16px !important; font-size: 12px !important; font-weight: 600 !important; border-radius: 20px !important; z-index: 10 !important; box-shadow: 0 4px 12px rgba(238, 90, 36, 0.3) !important;">SALE</div>
+        
+        <!-- Action Buttons -->
+        <div style="position: absolute !important; top: 16px !important; right: 16px !important; display: flex !important; flex-direction: column !important; gap: 8px !important; z-index: 10 !important;">
+            <button style="background: rgba(255, 255, 255, 0.9) !important; border: none !important; border-radius: 50% !important; width: 40px !important; height: 40px !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; backdrop-filter: blur(10px) !important; transition: all 0.3s ease !important; box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; margin: 0 !important; padding: 0 !important;" onclick="event.preventDefault(); event.stopPropagation(); handleLove(this)" onmouseover="this.style.background='rgba(255, 255, 255, 1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.9)'; this.style.transform='scale(1)'">
+                <ion-icon name="heart-outline" style="font-size: 18px !important; color: #e53e3e !important;"></ion-icon>
+            </button>
+            
+            <button style="background: rgba(255, 255, 255, 0.9) !important; border: none !important; border-radius: 50% !important; width: 40px !important; height: 40px !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; backdrop-filter: blur(10px) !important; transition: all 0.3s ease !important; box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; margin: 0 !important; padding: 0 !important;" onclick="event.preventDefault(); event.stopPropagation(); openModal('{{ product.image.url }}')" onmouseover="this.style.background='rgba(255, 255, 255, 1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.9)'; this.style.transform='scale(1)'">
+                <ion-icon name="eye-outline" style="font-size: 18px !important; color: #4a5568 !important;"></ion-icon>
+            </button>
+            
+            <button style="background: rgba(255, 255, 255, 0.9) !important; border: none !important; border-radius: 50% !important; width: 40px !important; height: 40px !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; backdrop-filter: blur(10px) !important; transition: all 0.3s ease !important; box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; margin: 0 !important; padding: 0 !important;" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='{% url 'product_detail' product.pk %}'" onmouseover="this.style.background='rgba(255, 255, 255, 1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.9)'; this.style.transform='scale(1)'">
+                <ion-icon name="repeat-outline" style="font-size: 18px !important; color: #4a5568 !important;"></ion-icon>
+            </button>
+        </div>
+        
+        <!-- Product Image -->
+        <div style="position: relative !important; overflow: hidden !important; width: 100% !important; height: 240px !important;">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100% !important; height: 100% !important; object-fit: contain !important; transition: transform 0.3s ease !important; display: block !important; margin: 0 !important; padding: 0 !important;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+        
+        <!-- Product Content -->
+        <div style="padding: 24px !important; margin: 0 !important;">
+            <div style="display: inline-block !important; background: #edf2f7 !important; color: #4a5568 !important; padding: 6px 12px !important; border-radius: 16px !important; font-size: 12px !important; font-weight: 600 !important; text-transform: uppercase !important; letter-spacing: 0.5px !important; margin: 0 0 12px 0 !important;">{{ product.main_category.name }}</div>
+            
+            <h3 style="margin: 0 0 16px 0 !important; font-size: 20px !important; color: #2d3748 !important; font-weight: 600 !important; line-height: 1.4 !important; padding: 0 !important;">{{ product.name }}</h3>
+            
+            <div style="display: flex !important; align-items: baseline !important; gap: 12px !important; margin: 0 0 16px 0 !important; flex-wrap: wrap !important;">
+                <span style="font-size: 24px !important; font-weight: 700 !important; color: #2d3748 !important; margin: 0 !important; padding: 0 !important; line-height: 1 !important;">${{ product.final_price }}</span>
+                <span style="font-size: 16px !important; color: #a0aec0 !important; text-decoration: line-through !important; margin: 0 !important; padding: 0 !important; line-height: 1 !important;">${{ product.price }}</span>
+                <span style="background: linear-gradient(135deg, #48bb78, #38a169) !important; color: white !important; padding: 4px 8px !important; border-radius: 12px !important; font-size: 11px !important; font-weight: 600 !important; margin: 0 !important;">{{ product.discount }}% OFF</span>
+            </div>
+            
+            <div style="display: flex !important; align-items: center !important; gap: 8px !important; margin: 0 0 20px 0 !important; flex-wrap: nowrap !important;">
+                <div style="color: #f6ad55 !important; font-size: 16px !important; display: flex !important; align-items: center !important; margin: 0 !important; padding: 0 !important; line-height: 1 !important;">
+                    <ion-icon name="star" style="margin: 0 !important; padding: 0 !important;"></ion-icon>
+                    <ion-icon name="star" style="margin: 0 !important; padding: 0 !important;"></ion-icon>
+                    <ion-icon name="star" style="margin: 0 !important; padding: 0 !important;"></ion-icon>
+                    <ion-icon name="star-outline" style="margin: 0 !important; padding: 0 !important;"></ion-icon>
+                    <ion-icon name="star-outline" style="margin: 0 !important; padding: 0 !important;"></ion-icon>
+                </div>
+                <span style="color: #718096 !important; font-size: 14px !important; margin: 0 !important; padding: 0 !important; line-height: 1 !important; white-space: nowrap !important;">(4.2) • 124 reviews</span>
+            </div>
+            
+            <button class="add-to-cart-btn" data-product="{{ product.pk }}" data-in-cart="{% if product.pk in cart_items %}true{% else %}false{% endif %}" style="background: {% if product.pk in cart_items %}#6c757d{% else %}#e53e3e{% endif %} !important; color: white !important; border: none !important; padding: 14px 24px !important; border-radius: 12px !important; font-size: 16px !important; font-weight: 600 !important; cursor: pointer !important; width: 100% !important; transition: all 0.3s ease !important; box-shadow: 0 4px 16px rgba({% if product.pk in cart_items %}108, 117, 125{% else %}229, 62, 62{% endif %}, 0.3) !important; margin: 0 !important; display: block !important;" onclick="event.preventDefault(); event.stopPropagation();" {% if product.pk in cart_items %}onmouseover="this.style.background='#5a6268'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 24px rgba(108, 117, 125, 0.4)'" onmouseout="this.style.background='#6c757d'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 16px rgba(108, 117, 125, 0.3)'"{% else %}onmouseover="this.style.background='#c53030'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 24px rgba(229, 62, 62, 0.4)'" onmouseout="this.style.background='#e53e3e'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 16px rgba(229, 62, 62, 0.3)'"{% endif %}>{% if product.pk in cart_items %}Go to Cart{% else %}Add to Cart{% endif %}</button>
+        </div>
+    </div>
+</a>
+{% endfor %}
+
+<!-- Enhanced Cart Message -->
+<div id="cart-message" style="display: none; position: fixed; top: 30px; right: 30px; background: linear-gradient(135deg, #28a745, #20c997) !important; color: white !important; padding: 18px 24px !important; border-radius: 16px !important; z-index: 9999 !important; box-shadow: 0 8px 32px rgba(40, 167, 69, 0.4) !important; backdrop-filter: blur(20px) !important; border: 1px solid rgba(255,255,255,0.2) !important; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important; font-size: 15px !important; font-weight: 600 !important; min-width: 280px !important; transform: translateX(400px) !important; transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;">
+    <div style="display: flex !important; align-items: center !important; gap: 12px !important;">
+        <div style="background: rgba(255,255,255,0.2) !important; border-radius: 50% !important; width: 32px !important; height: 32px !important; display: flex !important; align-items: center !important; justify-content: center !important; flex-shrink: 0 !important;">
+            <ion-icon name="checkmark-circle" style="font-size: 18px !important; color: white !important;"></ion-icon>
+        </div>
+        <div style="flex: 1 !important;">
+            <div id="cart-message-text" style="margin: 0 !important; line-height: 1.4 !important;">Item added to cart!</div>
+        </div>
+        <button onclick="hideCartMessage()" style="background: transparent !important; border: none !important; color: rgba(255,255,255,0.8) !important; cursor: pointer !important; padding: 4px !important; border-radius: 4px !important; transition: all 0.2s ease !important; display: flex !important; align-items: center !important; justify-content: center !important;" onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.color='rgba(255,255,255,0.8)'; this.style.background='transparent'">
+            <ion-icon name="close" style="font-size: 16px !important;"></ion-icon>
+        </button>
+    </div>
+</div>
+
+<script>
+function hideCartMessage() {
+    const message = document.getElementById('cart-message');
+    message.style.transform = 'translateX(400px)';
+    setTimeout(() => {
+        message.style.display = 'none';
+    }, 500);
+}
+
+function showCartMessage(text) {
+    const message = document.getElementById('cart-message');
+    const messageText = document.getElementById('cart-message-text');
+    
+    messageText.innerText = text;
+    message.style.display = 'block';
+    
+    setTimeout(() => {
+        message.style.transform = 'translateX(0)';
+    }, 10);
+    
+    setTimeout(() => {
+        hideCartMessage();
+    }, 4000);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+    
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const productId = this.getAttribute('data-product');
+            const inCart = this.getAttribute('data-in-cart') === 'true';
+            
+            if (inCart) {
+                window.location.href = "{% url 'cart_view' %}";
+                return;
+            }
+            
+            const originalText = this.innerText;
+            const originalBg = this.style.backgroundColor;
+            
+            this.innerText = "Adding...";
+            this.style.backgroundColor = "#6c757d";
+            
+            fetch("{% url 'add_to_cart' %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "product_id=" + productId
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    this.innerText = "Go to Cart";
+                    this.style.backgroundColor = "#6c757d";
+                    this.style.boxShadow = "0 4px 16px rgba(108, 117, 125, 0.3)";
+                    this.setAttribute('data-in-cart', 'true');
+                    
+                    this.onclick = function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.location.href = "{% url 'cart_view' %}";
+                    };
+                    this.onmouseover = function() {
+                        this.style.background = '#5a6268';
+                        this.style.transform = 'translateY(-2px)';
+                        this.style.boxShadow = '0 8px 24px rgba(108, 117, 125, 0.4)';
+                    };
+                    this.onmouseout = function() {
+                        this.style.background = '#6c757d';
+                        this.style.transform = 'translateY(0)';
+                        this.style.boxShadow = '0 4px 16px rgba(108, 117, 125, 0.3)';
+                    };
+                    
+                    showCartMessage(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                
+                this.innerText = originalText;
+                this.style.backgroundColor = originalBg;
+                
+                const errorMessage = document.getElementById('cart-message');
+                errorMessage.style.background = 'linear-gradient(135deg, #dc3545, #c82333)';
+                errorMessage.style.boxShadow = '0 8px 32px rgba(220, 53, 69, 0.4)';
+                showCartMessage("Error adding to cart");
+                
+                setTimeout(() => {
+                    errorMessage.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+                    errorMessage.style.boxShadow = '0 8px 32px rgba(40, 167, 69, 0.4)';
+                }, 5000);
+            });
+        });
+    });
+});
+</script>
+<!-- <div style="background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.12); position: relative; width: 320px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 16px 48px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px rgba(0,0,0,0.12)'">
+    <div style="position: absolute; top: 16px; left: 16px; background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white; padding: 8px 16px; font-size: 12px; font-weight: 600; border-radius: 20px; z-index: 2; box-shadow: 0 4px 12px rgba(238, 90, 36, 0.3);">SALE</div>
+    
+    <div style="position: relative; overflow: hidden;">
+        <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=600&h=400&fit=crop" alt="Snapback Cap" style="width: 100%; height: 240px; object-fit: cover; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    
+    <div style="padding: 24px;">
+        <h3 style="margin: 0 0 12px 0; font-size: 20px; color: #2d3748; font-weight: 600; line-height: 1.4;">Premium Snapback Cap</h3>
+        
+        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+            <span style="font-size: 24px; font-weight: 700; color: #2d3748;">$30.00</span>
+            <span style="font-size: 16px; color: #a0aec0; text-decoration: line-through; margin-left: 12px;">$45.00</span>
+            <span style="background: linear-gradient(135deg, #48bb78, #38a169); color: white; padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; margin-left: 12px;">33% OFF</span>
+        </div>
+        
+        <div style="display: flex; align-items: center; margin-bottom: 16px;">
+            <div style="color: #f6ad55; font-size: 16px; margin-right: 8px;">★★★★☆</div>
+            <span style="color: #718096; font-size: 14px;">(4.2) • 124 reviews</span>
+        </div>
+        
+        <div style="display: inline-block; background: #edf2f7; color: #4a5568; padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 20px;">Accessories</div>
+        
+        <button style="background: #e53e3e; color: white; border: none; padding: 14px 24px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(229, 62, 62, 0.3);" onmouseover="this.style.background='#c53030'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 24px rgba(229, 62, 62, 0.4)'" onmouseout="this.style.background='#e53e3e'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 16px rgba(229, 62, 62, 0.3)'">Add to Cart</button>
+    </div>
+</div> -->
+<!-- Image Modal -->
+<div id="imageModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:1000;">
+    <span onclick="closeModal()" style="position:absolute; top:20px; right:40px; color:white; font-size:30px; cursor:pointer;">&times;</span>
+    <img id="modalImage" style="max-width:80%; max-height:80%; border-radius:10px;">
+</div>
+
+<!-- Modern Love Toast -->
+<div id="loveNotification" style="
+    display:none;
+    position:fixed;
+    top:20px;
+    right:20px;
+    background:linear-gradient(135deg, #ff6a88, #ff99ac);
+    color:#fff;
+    padding:12px 20px;
+    border-radius:30px;
+    font-size:15px;
+    font-weight:600;
+    box-shadow:0 4px 15px rgba(0,0,0,0.2);
+    z-index:1001;
+    animation:slideIn 0.4s ease;
+">
+    <span style="vertical-align:middle;">You have such a great choice !!!</span>
+</div>
+
+<style>
+@keyframes slideIn {
+    from {opacity:0; transform:translateX(100%);}
+    to {opacity:1; transform:translateX(0);}
+}
+@keyframes slideOut {
+    from {opacity:1; transform:translateX(0);}
+    to {opacity:0; transform:translateX(100%);}
+}
+</style>
+
+<script>
+function openModal(src) {
+    document.getElementById('modalImage').src = src;
+    document.getElementById('imageModal').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('imageModal').style.display = 'none';
+}
+
+function handleLove(button) {
+    const toast = document.getElementById('loveNotification');
+    toast.style.display = 'block';
+    toast.style.animation = 'slideIn 0.4s ease';
+
+    setTimeout(() => {
+        toast.style.animation = 'slideOut 0.4s ease';
+        setTimeout(() => toast.style.display = 'none', 400);
+    }, 2000);
+
+    button.querySelector('ion-icon').setAttribute('name', 'heart');
+    button.style.color = '#ff6a88';
+}
+</script>
+
+
+<!-- 
+              <div class="showcase">
+              
+                <div class="showcase-banner">
+                  <img src="{% static 'img/1.jpg' %}" alt="Pure Garment Dyed Cotton Shirt" class="product-img default"
+                    width="300">
+                  <img src="{% static 'img/1.jpg' %}" alt="Pure Garment Dyed Cotton Shirt" class="product-img hover"
+                    width="300">
+              
+                  <p class="showcase-badge angle black">sale</p>
+              
+                  <div class="showcase-actions">
+                    <button class="btn-action">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </button>
+              
+                    <button class="btn-action">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </button>
+              
+                    <button class="btn-action">
+                      <ion-icon name="repeat-outline"></ion-icon>
+                    </button>
+              
+                    <button class="btn-action">
+                      <ion-icon name="bag-add-outline"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">shirt</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">Pure Garment Dyed Cotton Shirt</a>
+                  </h3>
+              
+                  <div class="showcase-rating">
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                  </div>
+              
+                  <div class="price-box">
+                    <p class="price">$45.00</p>
+                    <del>$56.00</del>
+                  </div>
+              
+                </div>
+              
+              </div>
+
+              <div class="showcase">
+              
+                <div class="showcase-banner">
+                  <img src="{% static 'img/1.jpg' %}" alt="MEN Yarn Fleece Full-Zip Jacket" class="product-img default"
+                    width="300">
+                  <img src="{% static 'img/1.jpg' %}" alt="MEN Yarn Fleece Full-Zip Jacket" class="product-img hover"
+                    width="300">
+              
+                  <div class="showcase-actions">
+                    <button class="btn-action">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </button>
+              
+                    <button class="btn-action">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </button>
+              
+                    <button class="btn-action">
+                      <ion-icon name="repeat-outline"></ion-icon>
+                    </button>
+              
+                    <button class="btn-action">
+                      <ion-icon name="bag-add-outline"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">Jacket</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">MEN Yarn Fleece Full-Zip Jacket</a>
+                  </h3>
+              
+                  <div class="showcase-rating">
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                  </div>
+              
+                  <div class="price-box">
+                    <p class="price">$58.00</p>
+                    <del>$65.00</del>
+                  </div>
+              
+                </div>
+              
+              </div>
+
+              <div class="showcase">
+              
+                <div class="showcase-banner">
+                  <img src="{% static 'img/1.jpg' %}" alt="Black Floral Wrap Midi Skirt" class="product-img default"
+                    width="300">
+                  <img src="{% static 'img/1.jpg' %}" alt="Black Floral Wrap Midi Skirt" class="product-img hover"
+                    width="300">
+              
+                  <p class="showcase-badge angle pink">new</p>
+              
+                  <div class="showcase-actions">
+                    <button class="btn-action">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </button>
+              
+                    <button class="btn-action">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </button>
+              
+                    <button class="btn-action">
+                      <ion-icon name="repeat-outline"></ion-icon>
+                    </button>
+              
+                    <button class="btn-action">
+                      <ion-icon name="bag-add-outline"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">skirt</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">Black Floral Wrap Midi Skirt</a>
+                  </h3>
+              
+                  <div class="showcase-rating">
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                  </div>
+              
+                  <div class="price-box">
+                    <p class="price">$25.00</p>
+                    <del>$35.00</del>
+                  </div>
+              
+                </div>
+              
+              </div>
+
+              <div class="showcase">
+              
+                <div class="showcase-banner">
+                  <img src="{% static 'img/1.jpg' %}" alt="Casual Men's Brown shoes" class="product-img default"
+                    width="300">
+                  <img src="{% static 'img/1.jpg' %}" alt="Casual Men's Brown shoes" class="product-img hover"
+                    width="300">
+              
+                  <div class="showcase-actions">
+                    <button class="btn-action">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </button>
+              
+                    <button class="btn-action">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </button>
+              
+                    <button class="btn-action">
+                      <ion-icon name="repeat-outline"></ion-icon>
+                    </button>
+              
+                    <button class="btn-action">
+                      <ion-icon name="bag-add-outline"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">casual</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">Casual Men's Brown shoes</a>
+                  </h3>
+              
+                  <div class="showcase-rating">
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                  </div>
+              
+                  <div class="price-box">
+                    <p class="price">$99.00</p>
+                    <del>$105.00</del>
+                  </div>
+              
+                </div>
+              
+              </div> -->
+
+             
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+    <!--
+      - TESTIMONIALS, CTA & SERVICE
+    -->
+
+    <div>
+
+<div class="container">
+  <div class="testimonials-box">
+
+    <!--
+      - TESTIMONIALS
+    -->
+
+    <div class="testimonial">
+      <h2 class="title">Customer Reviews</h2>
+
+      <div class="testimonial-card">
+        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="Michael Chen" class="testimonial-banner" width="80" height="80">
+
+        <p class="testimonial-name">Michael Chen</p>
+
+        <p class="testimonial-title">Tech Enthusiast</p>
+
+        <img src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/svg/chatbox-ellipses-outline.svg" alt="quotation" class="quotation-img" width="26">
+
+        <p class="testimonial-desc">
+          DN Electronics delivered my smartphone faster than expected. 
+          Excellent quality products and outstanding customer service!
+        </p>
+      </div>
+    </div>
+
+    <!--
+      - CTA
+    -->
+
+    <div class="cta-container">
+      <img src="https://images.unsplash.com/photo-1557394139-8afb164a0289?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="electronics collection" class="cta-banner">
+
+      <!-- <a href="#" class="cta-content">
+        <p class="discount">30% OFF</p>
+
+        <h2 class="cta-title">Electronics Sale</h2>
+
+        <p class="cta-text">Starting @ $25</p>
+
+        <button class="cta-btn">Shop Now</button>
+      </a> -->
+    </div>
+
+    <!--
+      - SERVICE
+    -->
+
+    <div class="service">
+      <h2 class="title">Why Choose DN Electronics</h2>
+
+      <div class="service-container">
+
+        <a href="#" class="service-item">
+          <div class="service-icon">
+            <ion-icon name="flash-outline"></ion-icon>
+          </div>
+
+          <div class="service-content">
+            <h3 class="service-title">Fast Delivery</h3>
+            <p class="service-desc">Same Day in Metro Cities</p>
+          </div>
+        </a>
+
+        <a href="#" class="service-item">
+          <div class="service-icon">
+            <ion-icon name="shield-checkmark-outline"></ion-icon>
+          </div>
+
+          <div class="service-content">
+            <h3 class="service-title">Genuine Products</h3>
+            <p class="service-desc">100% Authentic Electronics</p>
+          </div>
+        </a>
+
+        <a href="#" class="service-item">
+          <div class="service-icon">
+            <ion-icon name="headset-outline"></ion-icon>
+          </div>
+
+          <div class="service-content">
+            <h3 class="service-title">24/7 Tech Support</h3>
+            <p class="service-desc">Expert Help Anytime</p>
+          </div>
+        </a>
+
+        <a href="#" class="service-item">
+          <div class="service-icon">
+            <ion-icon name="refresh-outline"></ion-icon>
+          </div>
+
+          <div class="service-content">
+            <h3 class="service-title">Easy Returns</h3>
+            <p class="service-desc">30-Day Return Policy</p>
+          </div>
+        </a>
+
+        <a href="#" class="service-item">
+          <div class="service-icon">
+            <ion-icon name="card-outline"></ion-icon>
+          </div>
+
+          <div class="service-content">
+            <h3 class="service-title">Secure Payment</h3>
+            <p class="service-desc">Multiple Payment Options</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    </div>
+
+
+<script src="{% static 'js/script.js' %}"></script>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+    'use strict';
+
+// modal variables
+const modal = document.querySelector('[data-modal]');
+const modalCloseBtn = document.querySelector('[data-modal-close]');
+const modalCloseOverlay = document.querySelector('[data-modal-overlay]');
+
+// modal function
+const modalCloseFunc = function () { modal.classList.add('closed') }
+
+// modal eventListener
+modalCloseOverlay.addEventListener('click', modalCloseFunc);
+modalCloseBtn.addEventListener('click', modalCloseFunc);
+
+
+
+
+
+// notification toast variables
+const notificationToast = document.querySelector('[data-toast]');
+const toastCloseBtn = document.querySelector('[data-toast-close]');
+
+// notification toast eventListener
+toastCloseBtn.addEventListener('click', function () {
+  notificationToast.classList.add('closed');
+});
+
+
+
+
+
+// mobile menu variables
+const mobileMenuOpenBtn = document.querySelectorAll('[data-mobile-menu-open-btn]');
+const mobileMenu = document.querySelectorAll('[data-mobile-menu]');
+const mobileMenuCloseBtn = document.querySelectorAll('[data-mobile-menu-close-btn]');
+const overlay = document.querySelector('[data-overlay]');
+
+for (let i = 0; i < mobileMenuOpenBtn.length; i++) {
+
+  // mobile menu function
+  const mobileMenuCloseFunc = function () {
+    mobileMenu[i].classList.remove('active');
+    overlay.classList.remove('active');
+  }
+
+  mobileMenuOpenBtn[i].addEventListener('click', function () {
+    mobileMenu[i].classList.add('active');
+    overlay.classList.add('active');
+  });
+
+  mobileMenuCloseBtn[i].addEventListener('click', mobileMenuCloseFunc);
+  overlay.addEventListener('click', mobileMenuCloseFunc);
+
+}
+
+
+
+
+
+// accordion variables
+const accordionBtn = document.querySelectorAll('[data-accordion-btn]');
+const accordion = document.querySelectorAll('[data-accordion]');
+
+for (let i = 0; i < accordionBtn.length; i++) {
+
+  accordionBtn[i].addEventListener('click', function () {
+
+    const clickedBtn = this.nextElementSibling.classList.contains('active');
+
+    for (let i = 0; i < accordion.length; i++) {
+
+      if (clickedBtn) break;
+
+      if (accordion[i].classList.contains('active')) {
+
+        accordion[i].classList.remove('active');
+        accordionBtn[i].classList.remove('active');
+
+      }
+
+    }
+
+    this.nextElementSibling.classList.toggle('active');
+    this.classList.toggle('active');
+
+  });
+
+}
+</script>
+
+{% endblock %}

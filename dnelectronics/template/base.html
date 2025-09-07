@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anon - eCommerce Website</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/logo/favicon.ico" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+<link rel="stylesheet" href="{% static 'css/style-prefix.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<body>
+
+  <header>
+
+    <div class="header-top">
+
+      <div class="container">
+
+        <ul class="header-social-container">
+
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="header-alert-news">
+          <p>
+            <b>Free Shipping</b>
+            This Week Order Over - $55
+          </p>
+        </div>
+
+        <div class="header-top-actions">
+
+          <select name="currency">
+
+            <option value="usd">USD &dollar;</option>
+            <option value="eur">EUR &euro;</option>
+
+          </select>
+
+          <!-- <select name="language">
+
+            <option value="en-US">English</option>
+            <option value="es-ES">Espa&ntilde;ol</option>
+            <option value="fr">Fran&ccedil;ais</option>
+
+          </select> -->
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="header-main">
+
+      <div class="container">
+
+        <a href="{% url 'dashboard' %}" class="header-logo">
+          <img style="width: 150px; "  src="{% static '123.png' %}" alt="Anon's logo" >
+           <!-- <h2>Dnelectronics</h2> -->
+        </a>
+
+        <div class="header-search-container">
+  <form method="GET" action="{% url 'search_view' %}" style="display: flex;">
+    <input type="search" name="search" class="search-field" placeholder="Enter your product name..." value="{{ request.GET.search }}">
+    <button type="submit" class="search-btn">
+      <ion-icon name="search-outline"></ion-icon>
+    </button>
+  </form>
+</div>
+
+        <div class="header-user-actions">
+
+          <button class="action-btn" onclick="window.location.href='{% url 'account_details'  %}'">
+            <ion-icon name="person-outline"></ion-icon>
+          </button>
+
+          <!-- <button class="action-btn">
+            <ion-icon name="heart-outline"></ion-icon>
+            <span class="count">0</span>
+          </button> -->
+
+         <button class="action-btn" onclick="window.location.href='{% url 'cart_view'  %}'">
+            <ion-icon name="bag-handle-outline"></ion-icon>
+        </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="mobile-bottom-navigation">
+
+      <button class="action-btn" data-mobile-menu-open-btn>
+        <ion-icon name="menu-outline"></ion-icon>
+      </button>
+
+      <button class="action-btn">
+        <ion-icon name="bag-handle-outline"></ion-icon>
+
+        <span class="count">0</span>
+      </button>
+
+      <button class="action-btn">
+        <ion-icon name="home-outline"></ion-icon>
+      </button>
+
+      <button class="action-btn">
+        <ion-icon name="heart-outline"></ion-icon>
+
+        <span class="count">0</span>
+      </button>
+
+      <button class="action-btn" data-mobile-menu-open-btn>
+        <ion-icon name="grid-outline"></ion-icon>
+      </button>
+
+    </div>
+
+    <nav class="mobile-navigation-menu  has-scrollbar" data-mobile-menu>
+
+      <div class="menu-top">
+        <h2 class="menu-title">Menu</h2>
+
+        <button class="menu-close-btn" data-mobile-menu-close-btn>
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+
+      <ul class="mobile-menu-category-list">
+
+        <li class="menu-category">
+          <a href="#" class="menu-title">Home</a>
+        </li>
+
+        <li class="menu-category">
+
+          <button class="accordion-menu" data-accordion-btn>
+            <p class="menu-title">Men's</p>
+
+            <div>
+              <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+            </div>
+          </button>
+
+          <ul class="submenu-category-list" data-accordion>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Shirt</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Shorts & Jeans</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Safety Shoes</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Wallet</a>
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="menu-category">
+
+          <button class="accordion-menu" data-accordion-btn>
+            <p class="menu-title">Women's</p>
+
+            <div>
+              <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+            </div>
+          </button>
+
+          <ul class="submenu-category-list" data-accordion>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Dress & Frock</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Earrings</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Necklace</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Makeup Kit</a>
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="menu-category">
+
+          <button class="accordion-menu" data-accordion-btn>
+            <p class="menu-title">Jewelry</p>
+
+            <div>
+              <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+            </div>
+          </button>
+
+          <ul class="submenu-category-list" data-accordion>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Earrings</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Couple Rings</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Necklace</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Bracelets</a>
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="menu-category">
+
+          <button class="accordion-menu" data-accordion-btn>
+            <p class="menu-title">Perfume</p>
+
+            <div>
+              <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+            </div>
+          </button>
+
+          <ul class="submenu-category-list" data-accordion>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Clothes Perfume</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Deodorant</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Flower Fragrance</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title">Air Freshener</a>
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="menu-category">
+          <a href="#" class="menu-title">Blog</a>
+        </li>
+
+        <li class="menu-category">
+          <a href="#" class="menu-title">Hot Offers</a>
+        </li>
+
+      </ul>
+
+      <div class="menu-bottom">
+
+        <ul class="menu-category-list">
+
+          <li class="menu-category">
+
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Language</p>
+
+              <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">English</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Espa&ntilde;ol</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Fren&ccedil;h</a>
+              </li>
+
+            </ul>
+
+          </li>
+
+          <li class="menu-category">
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Currency</p>
+              <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">USD &dollar;</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">EUR &euro;</a>
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+
+        <ul class="menu-social-container">
+
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+
+
+
+  <!--
+    - MAIN
+  -->
+
+  <main>
+{% block content %}{% endblock %}
+
+
+  </main>
+
+
+
+
+
+  <!--
+    - FOOTER   start 
+  -->
+<footer style="background-color: #000000; color: #ffffff; padding: 50px 0 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 40px;">
+        
+        <!-- Main Footer Content -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 35px;">
+            
+            <!-- Company -->
+            <div>
+                <h3 style="margin: 0 0 20px 0; font-size: 22px; font-weight: 700;">DNELECTRONICS</h3>
+                <p style="color: #a1a1a1; line-height: 1.5; margin-bottom: 20px; font-size: 14px;">Premium electronics and technology solutions for modern consumers.</p>
+                
+                <div style="display: flex; gap: 10px;">
+                    <a href="#" style="width: 36px; height: 36px; background-color: #1877f2; display: flex; align-items: center; justify-content: center; text-decoration: none; border-radius: 4px;">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook" style="width: 18px; height: 18px; filter: invert(1);">
+                    </a>
+                    <a href="#" style="width: 36px; height: 36px; background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); display: flex; align-items: center; justify-content: center; text-decoration: none; border-radius: 4px;">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" style="width: 18px; height: 18px; filter: invert(1);">
+                    </a>
+                    <a href="#" style="width: 36px; height: 36px; background-color: #0077b5; display: flex; align-items: center; justify-content: center; text-decoration: none; border-radius: 4px;">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" style="width: 18px; height: 18px; filter: invert(1);">
+                    </a>
+                    <a href="#" style="width: 36px; height: 36px; background-color: #ff0000; display: flex; align-items: center; justify-content: center; text-decoration: none; border-radius: 4px;">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube" style="width: 18px; height: 18px; filter: invert(1);">
+                    </a>
+                </div>
+            </div>
+
+            <!-- Products -->
+            <div>
+                <h4 style="margin: 0 0 20px 0; font-size: 16px; font-weight: 600;">Products</h4>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <a href="#" style="color: #a1a1a1; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#a1a1a1'">Smartphones</a>
+                    <a href="#" style="color: #a1a1a1; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#a1a1a1'">Laptops</a>
+                    <a href="#" style="color: #a1a1a1; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#a1a1a1'">Audio</a>
+                    <a href="#" style="color: #a1a1a1; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#a1a1a1'">Gaming</a>
+                    <a href="#" style="color: #a1a1a1; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#a1a1a1'">Accessories</a>
+                </div>
+            </div>
+
+            <!-- Support -->
+            <div>
+                <h4 style="margin: 0 0 20px 0; font-size: 16px; font-weight: 600;">Support</h4>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <a href="#" style="color: #a1a1a1; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#a1a1a1'">Help Center</a>
+                    <a href="#" style="color: #a1a1a1; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#a1a1a1'">Shipping</a>
+                    <a href="#" style="color: #a1a1a1; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#a1a1a1'">Returns</a>
+                    <a href="#" style="color: #a1a1a1; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#a1a1a1'">Warranty</a>
+                    <a href="#" style="color: #a1a1a1; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#a1a1a1'">Contact</a>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div>
+                <h4 style="margin: 0 0 20px 0; font-size: 16px; font-weight: 600;">Newsletter</h4>
+                <p style="color: #a1a1a1; font-size: 13px; margin-bottom: 15px;">Get updates on new products and deals.</p>
+                
+                <div style="display: flex; margin-bottom: 15px;">
+                    <input type="email" placeholder="Your email" style="flex: 1; padding: 12px 16px; border: 1px solid #333; background-color: #111; color: #fff; font-size: 14px; outline: none; border-radius: 4px 0 0 4px;">
+                    <button style="padding: 12px 20px; background-color: #ffffff; color: #000; border: none; font-size: 14px; font-weight: 500; cursor: pointer; border-radius: 0 4px 4px 0;">Subscribe</button>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=16&h=16&fit=crop" alt="Email" style="width: 16px; height: 16px;">
+                        <span style="color: #a1a1a1; font-size: 13px;">support@dnelectronics.com</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=16&h=16&fit=crop" alt="Phone" style="width: 16px; height: 16px;">
+                        <span style="color: #a1a1a1; font-size: 13px;">1-800-DN-ELECT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trust Section -->
+        <div style="border-top: 1px solid #1a1a1a; padding: 25px 0; margin-bottom: 25px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 32px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=32&h=32&fit=crop" alt="Security" style="width: 28px; height: 28px; border-radius: 4px;">
+                        <span style="color: #ffffff; font-size: 14px; font-weight: 500;">Secure Payment</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="https://images.unsplash.com/photo-1566472887906-92cb9e482b4f?w=32&h=32&fit=crop" alt="Shipping" style="width: 28px; height: 28px; border-radius: 4px;">
+                        <span style="color: #ffffff; font-size: 14px; font-weight: 500;">Fast Shipping</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=32&h=32&fit=crop" alt="Support" style="width: 28px; height: 28px; border-radius: 4px;">
+                        <span style="color: #ffffff; font-size: 14px; font-weight: 500;">24/7 Support</span>
+                    </div>
+                </div>
+                
+                <!-- Payment Methods -->
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" style="height: 20px; filter: invert(0.8);">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" style="height: 20px; filter: invert(0.8);">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" style="height: 20px; filter: invert(0.8);">
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom -->
+        <div style="border-top: 1px solid #1a1a1a; padding: 20px 0; display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: #737373; font-size: 14px;">© 2025 DNELECTRONICS. All rights reserved.</span>
+            <div style="display: flex; gap: 24px;">
+                <a href="#" style="color: #737373; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#737373'">Privacy</a>
+                <a href="#" style="color: #737373; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#737373'">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+@media (max-width: 768px) {
+    footer div[style*="grid-template-columns: 1fr 1fr 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+    }
+    footer div[style*="justify-content: space-between"] {
+        flex-direction: column !important;
+        gap: 20px !important;
+        text-align: center !important;
+    }
+    footer div[style*="gap: 32px"] {
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+}
+</style>
+
+
+
+<!--
+    - FOOTER  End 
+  -->
+
+
+
+<script src="{% static 'js/script.js' %}"></script>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+    'use strict';
+
+// modal variables
+const modal = document.querySelector('[data-modal]');
+const modalCloseBtn = document.querySelector('[data-modal-close]');
+const modalCloseOverlay = document.querySelector('[data-modal-overlay]');
+
+// modal function
+const modalCloseFunc = function () { modal.classList.add('closed') }
+
+// modal eventListener
+modalCloseOverlay.addEventListener('click', modalCloseFunc);
+modalCloseBtn.addEventListener('click', modalCloseFunc);
+
+
+
+
+
+// notification toast variables
+const notificationToast = document.querySelector('[data-toast]');
+const toastCloseBtn = document.querySelector('[data-toast-close]');
+
+// notification toast eventListener
+toastCloseBtn.addEventListener('click', function () {
+  notificationToast.classList.add('closed');
+});
+
+
+
+
+
+// mobile menu variables
+const mobileMenuOpenBtn = document.querySelectorAll('[data-mobile-menu-open-btn]');
+const mobileMenu = document.querySelectorAll('[data-mobile-menu]');
+const mobileMenuCloseBtn = document.querySelectorAll('[data-mobile-menu-close-btn]');
+const overlay = document.querySelector('[data-overlay]');
+
+for (let i = 0; i < mobileMenuOpenBtn.length; i++) {
+
+  // mobile menu function
+  const mobileMenuCloseFunc = function () {
+    mobileMenu[i].classList.remove('active');
+    overlay.classList.remove('active');
+  }
+
+  mobileMenuOpenBtn[i].addEventListener('click', function () {
+    mobileMenu[i].classList.add('active');
+    overlay.classList.add('active');
+  });
+
+  mobileMenuCloseBtn[i].addEventListener('click', mobileMenuCloseFunc);
+  overlay.addEventListener('click', mobileMenuCloseFunc);
+
+}
+
+
+
+
+
+// accordion variables
+const accordionBtn = document.querySelectorAll('[data-accordion-btn]');
+const accordion = document.querySelectorAll('[data-accordion]');
+
+for (let i = 0; i < accordionBtn.length; i++) {
+
+  accordionBtn[i].addEventListener('click', function () {
+
+    const clickedBtn = this.nextElementSibling.classList.contains('active');
+
+    for (let i = 0; i < accordion.length; i++) {
+
+      if (clickedBtn) break;
+
+      if (accordion[i].classList.contains('active')) {
+
+        accordion[i].classList.remove('active');
+        accordionBtn[i].classList.remove('active');
+
+      }
+
+    }
+
+    this.nextElementSibling.classList.toggle('active');
+    this.classList.toggle('active');
+
+  });
+
+}
+</script>
+</body>
+
+</html>
